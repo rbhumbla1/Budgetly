@@ -1,0 +1,24 @@
+* {
+    margin: 2px;
+}
+
+h1 {
+    color: rgb(55, 224, 247);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.chart {
+    border: solid rgb(210, 210, 210);
+    float: left;
+    padding: 70px;
+  
+    
+}
+
+.goals {
+    border: solid rgb(210, 210, 210);
+    float: right;
+    padding: 70px;
+    
+
+}
