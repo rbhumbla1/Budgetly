@@ -1,0 +1,37 @@
+* {
+    margin: 2px;
+}
+
+h1 {
+    color: rgb(55, 224, 247);
+     font-family: rockwell; 
+}
+
+
+.chart {
+    border: solid rgb(210, 210, 210);
+    float: left;
+    width: 45%;
+    height: auto;
+  
+    
+}
+
+.goals {
+    border: solid rgb(210, 210, 210);
+    float: right;
+    width: 45%;
+    height: auto;
+    
+
+}
+
+.bottom-nav {
+    margin: 0%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    
+}
