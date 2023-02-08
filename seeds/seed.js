@@ -1,8 +1,10 @@
 const sequelize = require('../config/connection');
-const { User, Project } = require('../models');
+const { User, Budget, Expense, BudgetCategory } = require('../models');
 
 const userData = require('./userData.json');
-const projectData = require('./projectData.json');
+const budgetData = require('./budgetData.json');
+const expenseData = require('./expenseData.json');
+const budgetCategoryData = require('./budgetCategoryData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -12,12 +14,20 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  for (const project of projectData) {
-    await Project.create({
-      ...project,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  const budgets = await Budget.bulkCreate(budgetData, {
+    individualHooks: true,
+    returning: true,
+  });
+
+  const expenses = await Expense.bulkCreate(expenseData, {
+    individualHooks: true,
+    returning: true,
+  });
+
+  const budgetCategories = await BudgetCategory.bulkCreate(budgetCategoryData, {
+    individualHooks: true,
+    returning: true,
+  });
 
   process.exit(0);
 };

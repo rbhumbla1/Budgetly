@@ -1,0 +1,19 @@
+[
+    {
+        "food": "150.00",
+        "house_loan": "500.00",
+        "personal": "400.00",
+        "savings": "50.00",
+        "transportation": "150.00",
+        "user_id": "sal@hotmail.com"
+    },
+    {
+        "food": "200.00",
+        "house_loan": "0.00",
+        "personal": "300.00",
+        "savings": "150.00",
+        "transportation": "50.00",
+        "user_id": "tino@gmail.com"
+    }
+]
+
