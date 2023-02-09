@@ -7,6 +7,10 @@ h1 {
      font-family: rockwell; 
 }
 
+.navbar {
+    width: 100%;
+}
+
 
 .chart {
     border: solid rgb(210, 210, 210);
