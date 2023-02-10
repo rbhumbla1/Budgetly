@@ -35,3 +35,24 @@ h1 {
     background-color: black;
     
 }
+
+/* LOG IN CSS */
+body {
+    color: rgb(55, 224, 247);
+    font-family: rockwell;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 70vh;
+}
+main {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    height: auto;
+    width: 30vw;
+    padding: 1.5rem;
+    
+}
+

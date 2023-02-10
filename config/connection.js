@@ -13,8 +13,10 @@ if (process.env.JAWSDB_URL) {
     {
       //heroku
       host: process.env.HOST,
+      // host: 'localhost',
       dialect: 'mysql',
       port: process.env.PORT
+      // port: '3306'
     }
   );
 }
