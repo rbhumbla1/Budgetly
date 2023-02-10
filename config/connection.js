@@ -11,7 +11,7 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_USER,
     process.env.DB_PASSWORD,
     {
-      //heroku
+      //heroku - use DB_HOST & DB_PORT
       host: process.env.DB_HOST,
       dialect: 'mysql',
       port: process.env.DB_PORT
