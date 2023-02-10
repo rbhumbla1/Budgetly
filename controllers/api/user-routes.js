@@ -15,6 +15,32 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// router.get('/:id', (req, res) => {
+//   User.findOne({
+//     where: {
+//       id: req.params.id
+//     },
+//     attributes: ['id', 'name'],
+//     // include: [
+//     //   {
+//     //     model: Product,
+//     //     attribute: ['id', 'product_name', 'price', 'stock', 'category_id']
+//     //   }
+//     // ]
+//   })
+//   .then(UserDB => {
+//     if(!UserDB) {
+//       res.status(404).json(err);
+//       return;
+//     }
+//     res.json(UserDB)
+//   })
+//   .catch(err =>{
+//     res.status(500).json(err);
+//   })
+// });
+
+
 // Create a user
 router.post('/', async (req, res) => {
   console.log(req.body)
@@ -45,7 +71,6 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-
     const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
       res

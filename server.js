@@ -30,11 +30,6 @@ const sess = {
 
 app.use(session(sess));
 
-// Inform Express.js on which template engine to use
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -43,6 +38,13 @@ app.use(require('./controllers/index'));
 
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
+// Inform Express.js on which template engine to use
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+
+
+
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });

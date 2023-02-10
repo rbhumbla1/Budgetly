@@ -3,8 +3,8 @@ const userRoutes = require('./user-routes');
 const budgetRoutes = require('./budget-routes');
 const expenseRoutes = require('./expense-routes');
 
-router.use('/user', userRoutes);
-// router.use('/budget', budgetRoutes);
-// router.use('/expense', expenseRoutes);
+router.use('/users', userRoutes);
+router.use('/budgets', budgetRoutes);
+router.use('/expenses', expenseRoutes);
 
 module.exports = router;
