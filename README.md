@@ -38,3 +38,8 @@ This application will allow a user to create a profile describing their income a
 - Authentication (express-session and cookies) * Deorren
 - Application appearance (front-end) * Adena
 - Heroku * Karinne & Deorren
+
+Adena To-Do's
+- Get the Add Goals working
+- D3 Chart
+- Functional & attractive CSS (on different sized screens)
