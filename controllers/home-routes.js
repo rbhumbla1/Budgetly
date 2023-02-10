@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Budget = require('../models/BudgetTest');
+const Budget = require('../models/Budget');
 
 // route to get all dishes
 router.get('/', async (req, res) => {

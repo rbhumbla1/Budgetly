@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Budget = require('../../models/BudgetTest');
+const Budget = require('../../models/Budget');
 
 // route to create/add a goal using async/await
 router.post('/', async (req, res) => {

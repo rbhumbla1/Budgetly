@@ -21,13 +21,13 @@ Budget.init(
                 key: 'id',
             },
         },
-        category: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'budget_category',
-                key: 'id',
-            },
-        },
+        // category: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'budget_category',
+        //         key: 'id',
+        //     },
+        // },
     },
     {
         sequelize,
