@@ -1,13 +1,10 @@
 const router = require('express').Router();
-const withAuth = require("../utils/auth")
+const apiRoutes = require('./api');
 
+router.use('/api', apiRoutes);
 
-//will add withAuth soon as the routes are ready -deorren
-router.get('/', (req, res) => {
-    
-    res.render('all');
-    //res.render('all', loggedIn: req.session.loggedIn);
+router.use((req, res) => {
+  res.send("<h1>Wrong Route!</h1>")
 });
-
 
 module.exports = router;

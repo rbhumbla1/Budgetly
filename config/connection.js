@@ -12,10 +12,10 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_PASSWORD,
     {
       //heroku
-      host: process.env.HOST,
+      host: process.env.DB_HOST,
       // host: 'localhost',
       dialect: 'mysql',
-      port: process.env.PORT
+      port: process.env.DB_PORT
       // port: '3306'
     }
   );
