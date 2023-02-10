@@ -9,6 +9,11 @@ const budgetCategoryData = require('./budgetCategoryData.json');
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
+  const budgetCategories = await BudgetCategory.bulkCreate(budgetCategoryData, {
+    individualHooks: true,
+    returning: true,
+  });
+
   const users = await User.bulkCreate(userData, {
     individualHooks: true,
     returning: true,
@@ -24,10 +29,7 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  const budgetCategories = await BudgetCategory.bulkCreate(budgetCategoryData, {
-    individualHooks: true,
-    returning: true,
-  });
+
 
   process.exit(0);
 };
