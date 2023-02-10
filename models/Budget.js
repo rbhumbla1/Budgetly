@@ -14,6 +14,11 @@ Budget.init(
         amount: {
             type: DataTypes.FLOAT,
         },
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -21,13 +26,13 @@ Budget.init(
                 key: 'id',
             },
         },
-        // category: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: 'budget_category',
-        //         key: 'id',
-        //     },
-        // },
+        category_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'budget_category',
+                key: 'id',
+            },
+        },
     },
     {
         sequelize,
