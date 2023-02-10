@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
 
 // Get a single budget
 router.get('/:id', async (req, res) => {
+  console.log(req.body)
   try {
     const budgetData = await Budget.findByPk(req.params.id, {
       include: [{ model: User }, { model: BudgetCategory }],
