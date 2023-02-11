@@ -1,10 +1,41 @@
-<h1>Welcome, {{name}}!</h1>
+<div class='profile-page'>
+  <div class='profile-card'>
+    <nav class='navbar navbar-expand-lg bg-dark text-white-60'>
+      <div class='container-fluid d-flex'>
+        <a class='navbar-brand p-2 flex-grow-1' href='#'>Welcome, {{name}}</a>
+        <button
+          class='navbar-toggler p-2'
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target='#navbarNavAltMarkup'
+          aria-controls='navbarNavAltMarkup'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <span class='navbar-toggler-icon'></span>
+        </button>
+        <div
+          class='collapse navbar-collapse text-white-60 justify-content-lg-end'
+          id='navbarNavAltMarkup'
+        >
+          <div class='navbar-nav'>
+            <a class='nav-link active' aria-current='page' href='#'>Home</a>
+            <a class='nav-link' href='/goals'>Goals</a>
+            <a class='nav-link' id='logout-button' href='#'>Logout</a>
 
-{{#if logged_in}}
-    <button id="logout-button"> LogOut</button>
-    <a href="/goals">Goals</a>
-{{/if}}
-<p>Profile page coming soon...</p>
+          </div>
+        </div>
 
-<script src="/js/logout.js"></script>   
+      </div>
+    </nav>
 
+    <div class="profile-bio">
+      <p>Profile page in the making...</p>
+    </div>
+
+
+  </div>
+
+</div>
+
+<script src='/js/logout.js'></script>
