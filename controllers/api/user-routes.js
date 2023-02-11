@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 // Get a user
+
 router.get('/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id);
@@ -62,9 +63,12 @@ router.post('/', async (req, res) => {
 
 // User login route
 router.post('/login', async (req, res) => {
-  console.log(req.body)
+  console.log(req.body.email)
   try {
+    // console.log(req.body.email)
     const userData = await User.findOne({ where: { email: req.body.email } });
+    console.log(userData)
+    
     if (!userData) {
       res
         .status(400)
@@ -78,7 +82,14 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-    res.json({ user: userData, message: 'You are now logged in!' });
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+    
   } catch (err) {
     res.status(400).json(err);
   }
@@ -118,6 +129,18 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+//USER LOGOUT
+
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
 
