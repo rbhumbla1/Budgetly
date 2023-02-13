@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Budget, User } = require('../models');
 const withAuth = require('../utils/auth');
+const { QueryTypes } = require('sequelize');
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
 
 // THIS IS PROFILE PAGE, WHICH CAN BE OUR HOME PAGE AFTER LOGGING IN
 router.get('/profile', withAuth, async (req, res) => {
+  console.log("PROFILE in HOMEROUTE");
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },

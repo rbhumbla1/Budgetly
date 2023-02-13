@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Budget, User, BudgetCategory } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // Get all budgets
 router.get('/', async (req, res) => {
@@ -11,6 +12,29 @@ router.get('/', async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
+});
+
+// Added a route to get data to diaply budget goals for a user
+router.get('/goals', withAuth, async (req, res) => {
+  
+  try {
+
+    const budgetData = await Budget.findAll({ where: { user_id: req.session.user_id } },
+      {
+        attributes: ['category_id', 'amount'],
+      });
+
+      const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+  
+      res.render('goals', {
+        budgets,
+        logged_in: true,
+      });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
 });
 
 // Get a single budget
@@ -30,6 +54,8 @@ router.get('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 // Create a budget
 router.post('/', async (req, res) => {
