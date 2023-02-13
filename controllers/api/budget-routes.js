@@ -71,7 +71,7 @@ router.get('/:id', async (req, res) => {
 
 
 // Create a budget
-router.post('/', withAuth, async  (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const budgetData = await Budget.create({
         amount: req.body.amount,
@@ -92,16 +92,17 @@ router.post('/', withAuth, async  (req, res) => {
 });
 
 // Update a budget
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     try {
-      const budgetData = await Budget.update(req.body, {
+      const budgetData = await Budget.update({amount: req.body.amount}, {
         where: {
-          id: req.params.id,
+          category_id: req.params.id,
+          user_id: req.session.user_id
         },
         individualHooks: true
       });
       if (!budgetData[0]) {
-        res.status(404).json({ message: 'No user with this id!' });
+        res.status(404).json({ message: 'No budget with this category and user!' });
         return;
       }
       res.status(200).json(budgetData);
@@ -111,15 +112,18 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete a budget
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
+   
     const budgetData = await Budget.destroy({
       where: {
-        id: req.params.id,
+        amount: req.body.amount,
+        category_id: req.params.id,
+        user_id: req.session.user_id
       },
     });
     if (!budgetData) {
-      res.status(404).json({ message: 'No library card found with that id!' });
+      res.status(404).json({ message: 'No budget with this category and user!' });
       return;
     }
     res.status(200).json(budgetData);

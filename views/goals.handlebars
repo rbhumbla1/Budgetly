@@ -105,48 +105,68 @@
 
       <div>
         {{name}}'s Current Budget Goals:
-        <div class="row align-center mb-5">
-          
-          <table class="table">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Budget Category</th>
-                <th scope="col">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each budgets as |Budget|}}
-              <tr>
-                <td>{{Budget.category_name}}</td>
-                <td>{{Budget.amount}}</td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
+        <div class="row justify-content-center">
+          <div class="col-md-6 ">
+            <table class="table table-bordered table-responsive">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Budget Category</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each budgets as |Budget|}}
+                <tr>
+                  <td>{{Budget.category_name}}</td>
+                  <td>{{Budget.amount}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
 
+          </div>
         </div>
 
       </div>
 
       {{!-- Add new goals --}}
       <div>
-        Add a New Goal
+        Budget Goals Actions
       </div>
-      <form id='form-new-goal' class='new-goal-form'>
-        <select id="category" class="form-select" aria-label="Default select example">
-          <option selected>Category</option>
-          <option value="1">Food</option>
-          <option value="2">House Loan</option>
-          <option value="3">Personal</option>
-          <option value="4">Savings</option>
-          <option value="5">Transportation</option>
-        </select>
+      {{!-- Radio button for various actions --}}
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="addGoal">
+        <label class="form-check-label" for="inlineCheckbox1">Add a New Goal</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="updateGoal">
+        <label class="form-check-label" for="inlineCheckbox2">Update a Goal</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="deleteGoal">
+        <label class="form-check-label" for="inlineCheckbox3">Delete a Goal</label>
+      </div>
 
+      {{!-- Form to get goal information --}}
+      <form id='form-new-goal' class='new-goal-form'>
+        <div id="amt-label">
+          Budget Category
+        </div>
         <div>
-          <div>
+          <select id="category" class="form-select" aria-label="Default select example">
+            <option selected>Category</option>
+            <option value="1">Food</option>
+            <option value="2">House Loan</option>
+            <option value="3">Personal</option>
+            <option value="4">Savings</option>
+            <option value="5">Transportation</option>
+          </select>
+        </div>
+        <div>
+          <div id="amt-label">
             Budget Amount
           </div>
-          <div class="input-group mb-3">
+          <div id="amt" class="input-group mb-3">
             <span class="input-group-text">$</span>
             <input id="amount" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
           </div>
