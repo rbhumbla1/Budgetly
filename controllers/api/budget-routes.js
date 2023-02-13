@@ -24,7 +24,22 @@ router.get('/goals', withAuth, async (req, res) => {
         attributes: ['category_id', 'amount'],
       });
 
+      const nameData = await BudgetCategory.findAll({
+        attributes: ['category'],
+      });
+      const names = nameData.map((name) => name.get({ plain: true }));
+      console.log("$$$$ name", names);
+
       const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+      console.log("**** original BUDGET", budgets);
+
+      budgets.forEach((budget) => {
+        budget.category_name = names[budget.category_id - 1].category;
+      });
+
+ 
+      console.log("**** updated BUDGET", budgets);
+      
   
       res.render('goals', {
         budgets,

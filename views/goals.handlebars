@@ -101,18 +101,31 @@
     <div class="goals">
       My Goals
 
-  {{!-- Display Budget Goals of the user --}}
+      {{!-- Display Budget Goals of the user --}}
+
       <div>
-        {{#each budgets as |Budget|}}
+        {{name}}'s Current Budget Goals:
         <div class="row align-center mb-5">
-          <div class="col-md-6">
-            {{Budget.category_id}}
-          </div>
-          <div class="col-md-6">
-            {{Budget.amount}}
-          </div>
+          
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Budget Category</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each budgets as |Budget|}}
+              <tr>
+                <td>{{Budget.category_name}}</td>
+                <td>{{Budget.amount}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+
         </div>
-        {{/each}}
+
       </div>
 
       {{!-- Add new goals --}}
