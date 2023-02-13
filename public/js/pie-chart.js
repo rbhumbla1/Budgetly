@@ -1,6 +1,6 @@
 async function createChart(event) {
     event.preventDefault();
-    const userSavings = document.querySelector('#savings').value;
+    const userSavings = document.querySelector('#Savings').value;
     const userHouseLoan = document.querySelector('#house_loan').value;
     const userFood = document.querySelector('#food').value;
     const userTransportation = document.querySelector('#transportation').value;
@@ -61,11 +61,11 @@ async function createChart(event) {
       const response = await fetch(`/api/expense`, {
         method: 'POST',
         body: JSON.stringify({
-          savings,
-          house_loan,
           food,
-          transportation,
+          house_loan,
           personal,
+          savings,
+          transportation,
         }),
         headers: {
           'Content-Type': 'application/json',

@@ -1,38 +1,39 @@
-const emailInput = document.getElementById("email-input")
-const passwordInput = document.getElementById("password-input")
-const formLogin = document.getElementById("form-login")
+const formLogin = document.getElementById('form-login');
+const createBtn = document.querySelector('.create-account');
+const incorrect = document.getElementById('incorrect');
 
 
+const loginHandler = async (e) => {
+  e.preventDefault();
 
-////////////=== LOGGG INNNNNN 
+  const email = document.getElementById('email-input').value.trim();
+  const password = document.getElementById('password-input').value.trim();
 
+  //   let userInputs = {
+  //     email: emailInput.value.trim(),
+  //     password: passwordInput.value.trim(),
+  //   };
 
+  if (email && password) {
+    // Send a POST request to the API endpoint
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-
-console.log("test")
-
-const fetchLogin = (items) =>
-    fetch("/login", {
-        method:"POST",
-        headers: {
-            "Content-Type":"Application/json"
-        },
-        body: JSON.stringify(items)
-    })
-    
-
-
-
-const loginHandler =(e) => {
-    e.preventDefault()
-    let userInputs = {
-        email: emailInput.value.trim(),
-        password: passwordInput.value.trim()
+    if (response.ok) {
+      document.location.replace('/profile');
+    } else {
+      incorrect.innerHTML = 'Incorrect Email/Password';
     }
+  }
 
-    console.log(userInputs)
+  ////////////=== LOGGG INNNNNN
+};
 
-    fetchLogin(userInputs)
-}
 
-formLogin.addEventListener("submit", loginHandler)
+formLogin.addEventListener('submit', loginHandler);
+
+
+
