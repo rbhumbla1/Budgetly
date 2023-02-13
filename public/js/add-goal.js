@@ -1,25 +1,29 @@
-async function newFormHandler(event) {
-    event.preventDefault();
-    const category = document.querySelector('#category').value;
-    const amount = document.querySelector('#amount').value;
+const formNewGoal = document.getElementById('form-new-goal');
 
 
-    const response = await fetch(`/api/goals`, {
-        method: 'POST',
-        body: JSON.stringify({
-          category,
-          amount,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+const newFormHandler = async (e) => {
+    e.preventDefault();
 
-    if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert('Failed to add goal');
-      }
-    }
+  const category = document.getElementById('category').value.trim(); 
+  const amount = document.getElementById('amount').value.trim(); 
 
-document.querySelector('.new-goal-form').addEventListener('submit', newFormHandler);
+  const response = await fetch(`/api/budgets`, {
+    method: 'POST',
+    body: JSON.stringify({
+      category,
+      amount,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    document.location.replace('/api/budgets/goals');
+  } else {
+    alert('Failed to add goal');
+  }
+}
+
+formNewGoal.addEventListener('submit', newFormHandler);
+
