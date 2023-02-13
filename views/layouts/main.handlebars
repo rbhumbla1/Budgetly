@@ -4,7 +4,7 @@
   <title>Budgetly</title>
   <link rel="stylesheet" href="/css/style.css">
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
+   <script src="https://d3js.org/d3.v4.min.js"></script>
   
 </head>
 
@@ -42,76 +42,67 @@
         <div class="parent">
         <div class="chart">
           <div>Monthly Spending</div>
+          
            <svg width="500" height="400"></svg>
-           
-    <script>
-        // Step 3
-        var svg = d3.select("svg"),
-            width = svg.attr("width"),
-            height = svg.attr("height"),
-            radius = 200;
-
-        // Step 1        
-        var data = [{name: "Transportation", share:50.00}, 
-                    {name: "Rent", share: 100.00},
-                    {name: "Example", share: 15.42},
-                    {name: "this", share: 13.65},
-                    {name: "Remaining", share: 150.00},
-                ];
-        
-        var g = svg.append("g")
-                   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-        // Step 4
-        var ordScale = d3.scaleOrdinal()
-                        	.domain(data)
-                        	.range(['#D67F54','#C5998C','#DDE2DC','#A4C392','#4E4035']);
-
-        // Step 5
-        var pie = d3.pie().value(function(d) { 
-                return d.share; 
-            });
-
-        var arc = g.selectAll("arc")
-                   .data(pie(data))
-                   .enter();
-
-        // Step 6
-        var path = d3.arc()
-                     .outerRadius(radius)
-                     .innerRadius(0);
-
-        arc.append("path")
-           .attr("d", path)
-           .attr("fill", function(d) { return ordScale(d.data.name); });
-
-        // Step 7
-        var label = d3.arc()
-                      .outerRadius(radius)
-                      .innerRadius(0);
-            
-        arc.append("text")
-           .attr("transform", function(d) { 
-                    return "translate(" + label.centroid(d) + ")"; 
-            })
-           .text(function(d) { return d.data.name; })
-           .style("font-family", "arial")
-           .style("font-size", 15);
-            </script>
+  
 <div class="chart-inputs">
-          <div>
-            <input>
-            </div>
-            <div>
-            <input>
-            </div>
-            <div>
-            <input>
-            </div>
+          <form class='new-chart'>
+      <div>
+        <label for='savings'>
+          Savings:
+        </label>
+        <br />
+        <input id='savings' name='savings' value="number">
+        {{savings}}
+      </input>
+      <br />
+
+      <label for='house_loan'>
+          House Loan:
+        </label>
+        <br />
+        <input id='house_loan' name='house_loan' value="number">
+        {{house_loan}}
+      </input>
+      <br />
+
+        <label for='food'>
+          Food:
+        </label>
+        <br />
+        <input id='food' name='food' value="number">
+        {{food}}
+      </input>
+      <br />
+
+      <label for='transportation'>
+          Transportation:
+        </label>
+        <br />
+        <input id='transportation' name='transportation' value="number">
+        {{transportation}}
+      </input>
+      <br />
+
+      <label for='personal'>
+          Personal:
+        </label>
+        <br />
+        <input id='personal' name='personal' value="number">
+        {{personal}}
+      </input>
+      <br />
+
+
+
+    <button type='submit' value='Submit'> Submit </button>
+    </div>    
+        </form> 
 </div>
-        </div>
+</div>
+</div>
         
-        
+   <div></div>     
         <div class="goals">
           My Goals
 

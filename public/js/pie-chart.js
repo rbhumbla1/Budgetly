@@ -1,54 +1,82 @@
+async function createChart(event) {
+    event.preventDefault();
+    const userSavings = document.querySelector('#savings').value;
+    const userHouseLoan = document.querySelector('#house_loan').value;
+    const userFood = document.querySelector('#food').value;
+    const userTransportation = document.querySelector('#transportation').value;
+    const userPersonal = document.querySelector('#personal').value;
 
-        // Step 3
-        var svg = d3.select("svg"),
-            width = svg.attr("width"),
-            height = svg.attr("height"),
-            radius = 200;
 
-        // Step 1        
-        var data = [{name: "Transportation", share:50.00}, 
-                    {name: "Rent", share: 100.00},
-                    {name: "Example", share: 15.42},
-                    {name: "Example", share: 13.65},
-                    {name: "Remaining", share: 150.00},
-                ];
-        
-        var g = svg.append("g")
-                   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    var data = [{name:"Savings", share: userSavings},
+                {name:"House Loan", share: userHouseLoan},
+                {name:"Food", share: userFood},
+                {name:"Transportation", share: userTransportation},
+                {name:"Personal", share: userPersonal},
+            ];
+    
+    
+    var svg = d3.select("svg"),
+    width = svg.attr("width"),
+    height = svg.attr("height"),
+    radius = 200;
+    
+    var g = svg.append("g")
+                       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                       var ordScale = d3.scaleOrdinal()
+                       .domain(data)
+                       .range(['#ffd384','#94ebcd','#fbaccc','#d3e0ea','#fa7f72']);
+    
+    
+    var pie = d3.pie().value(function(d) { 
+           return d.share; 
+       });
+    
+    var arc = g.selectAll("arc")
+              .data(pie(data))
+              .enter();
+    
+    
+    var path = d3.arc()
+                .outerRadius(radius)
+                .innerRadius(0);
+    
+    arc.append("path")
+      .attr("d", path)
+      .attr("fill", function(d) { return ordScale(d.data.name); });
+    
+    
+    var label = d3.arc()
+                 .outerRadius(radius)
+                 .innerRadius(0);
+    if (data)
+    arc.append("text")
+      .attr("transform", function(d) { 
+               return "translate(" + label.centroid(d) + ")"; 
+       })
+      .text(function(d) { return d.data.name; })
+      .style("font-family", "arial")
+      .style("font-size", 15);
 
-        // Step 4
-        var ordScale = d3.scaleOrdinal()
-                        	.domain(data)
-                        	.range(['#ffd384','#94ebcd','#fbaccc','#d3e0ea','#fa7f72']);
 
-        // Step 5
-        var pie = d3.pie().value(function(d) { 
-                return d.share; 
-            });
+      const response = await fetch(`/api/expense`, {
+        method: 'POST',
+        body: JSON.stringify({
+          savings,
+          house_loan,
+          food,
+          transportation,
+          personal,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        var arc = g.selectAll("arc")
-                   .data(pie(data))
-                   .enter();
-
-        // Step 6
-        var path = d3.arc()
-                     .outerRadius(radius)
-                     .innerRadius(0);
-
-        arc.append("path")
-           .attr("d", path)
-           .attr("fill", function(d) { return ordScale(d.data.name); });
-
-        // Step 7
-        var label = d3.arc()
-                      .outerRadius(radius)
-                      .innerRadius(0);
-            
-        arc.append("text")
-           .attr("transform", function(d) { 
-                    return "translate(" + label.centroid(d) + ")"; 
-            })
-           .text(function(d) { return d.data.name; })
-           .style("font-family", "arial")
-           .style("font-size", 15);
-            
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        alert('Failed to add expense');
+      }
+    };
+    
+    document.querySelector('.new-chart').addEventListener('submit', createChart);
