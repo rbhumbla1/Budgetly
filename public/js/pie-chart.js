@@ -78,7 +78,7 @@ async function createChart(event) {
     document.querySelector('.new-chart').addEventListener('submit', createChart);
 
 
-    Step 3
+    //Step 3
 var svg = d3.select("svg");
 let svg = document.getElementById("pie-chart");
 let width = svg.getAttribute("width");

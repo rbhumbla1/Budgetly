@@ -62,4 +62,85 @@ h1 {
 }
 
 
+pre {
+    margin-top: 30px !important;
+    border-top: black !important;
+}                       
+
+h5{
+    color: rgb(55, 224, 247);
+}
+
+h7{
+    font-size: 10px;
+}
+
+.navbar{
+    color: white;
+    background-color: rgb(116, 219, 233);
+    border-radius: 5px;
+    
+}
+
+#title{
+   margin-top: 50px;
+}
+
+#budgetly{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+}
+
+.btn-outline-secondary{
+    color: white !important;
+    border-color: white !important;
+    border-radius: 10px;
+}
+
+#test{
+    border: 1px, black, solid;
+}
+
+.expenseItem{
+    opacity: 0.8;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.expenseList{
+    list-style: none;
+    display: flex;
+    justify-content: space-between !important;
+    margin-bottom: 0px !important;
+    margin-left: 10px;
+}
+
+
+.noteItem{
+    display: flex;
+    justify-content: center !important;
+}
+
+ul{
+    margin-bottom: none;
+    margin-right: 110px;
+}
+
+p{
+    margin-bottom: none;
+}
+
+#catNav{
+    margin-left: 100px;
+}
+
+#expenseNav{
+    font-weight: 700;
+    color: rgb(112, 106, 106);
+}
+
+
 
