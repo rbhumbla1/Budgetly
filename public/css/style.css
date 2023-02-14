@@ -102,8 +102,6 @@ h7{
 }
 
 .expenseItem{
-    border: 2px rgb(116, 219, 233) solid;
-    border-radius: 5px;
     opacity: 0.8;
     margin-bottom: 5px;
     padding-top: 5px;

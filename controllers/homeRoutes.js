@@ -48,7 +48,6 @@ router.get('/goals', (req, res) => {
   res.render('goals');
 });
 
-
 router.get('/expenses', (req, res) => {
   res.render('expenses');
 });
