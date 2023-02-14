@@ -3,12 +3,28 @@ const { Budget, User, BudgetCategory } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Get all budgets
-router.get('/', async (req, res) => {
+router.get('/',  withAuth, async (req, res) => {
     try {
-      const budgetData = await Budget.findAll({
-        include: [{ model: User }, { model: BudgetCategory }],
+      const budgetData = await Budget.findAll({ where: { user_id: req.session.user_id },
+        attributes:['category_id','amount','date_created'] 
       });
-      res.status(200).json(budgetData);
+
+      // Get Budget cateories
+      const nameData = await BudgetCategory.findAll({
+        attributes: ['category'],
+      });
+      const names = nameData.map((name) => name.get({ plain: true }));
+    
+      const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+     
+      //add category_name to the data send to goals.handlebar for displaying
+      budgets.forEach((budget) => {
+        budget.category_name = names[budget.category_id - 1].category;
+      });
+
+      console.log("*********BUDGET", budgets);
+      res.status(200).json(budgets);
+
     } catch (err) {
       res.status(500).json(err);
     }
