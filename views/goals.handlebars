@@ -49,7 +49,7 @@
       {{!-- Display Budget Goals of the user --}}
 
       <div>
-        {{name}}'s Current Budget Goals:
+        {{user.name}}'s Current Budget Goals:
         <div class="row justify-content-center">
           <div class="col-md-6 ">
             <table class="table table-bordered table-responsive">
@@ -57,13 +57,15 @@
                 <tr>
                   <th scope="col">Budget Category</th>
                   <th scope="col">Amount</th>
+                  <th scope="col">Date Created</th>
                 </tr>
               </thead>
               <tbody>
                 {{#each budgets as |Budget|}}
                 <tr>
                   <td>{{Budget.category_name}}</td>
-                  <td>{{Budget.amount}}</td>
+                  <td>${{Budget.amount}}</td>
+                  <td>{{format_time Budget.date_created}}</td>
                 </tr>
                 {{/each}}
               </tbody>
