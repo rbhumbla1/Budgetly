@@ -42,77 +42,9 @@
       </div>
     </header>
       <main>
-        <div class="parent">
-        <div class="chart">
-          <div>Monthly Spending</div>
-           <svg width="500" height="400"></svg>
+     
+{{{body}}}
 
-{{!-- <div class="chart-inputs">
-          <label>
-            Savings:
-          </label>
-          <br />
-          <input>
-          <br />
-
-          <label>
-            Loans:
-          </label>
-          <br />
-          <input>
-          <br />
-
-          <label>
-            Food:
-          </label>
-          <br />
-          <input>
-          <br />
-
-          <label>
-            Transportation:
-          </label>
-          <br />
-          <input>
-          <br />
-
-          <label>
-            Personal:
-          </label>
-          <br />
-          <input>
-          <br />
-
-
-
-</div>
-        </div> --}}
-        
-        
-        <div class="goals">
-          My Goals
-
-          <div>
-            {{#each Budgets as |Budget|}}
-            <p>
-              {{Budget.category}}
-              {{Budget.amount}}
-            </p>
-            {{/each}}
-          </div>
-  <div>
-    Add a New Goal
-  </div>
-<form class='new-goal-form'>
-  <select id="category" class="form-select" aria-label="Default select example">
-  <option   selected>Category</option>
-  <option value="1">Food</option>
-  <option value="2">House Loan</option>
-  <option value="3">Personal</option>
-  <option value="4">Savings</option>
-  <option value="5">Transportation</option>
-</select>
-  
   </body>
   
 
