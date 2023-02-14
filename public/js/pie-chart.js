@@ -59,13 +59,9 @@ async function createChart(event) {
 
 
       const response = await fetch(`/api/expense`, {
-        method: 'POST',
+        method: 'GET',
         body: JSON.stringify({
-          food,
-          house_loan,
-          personal,
-          savings,
-          transportation,
+          
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -80,3 +76,11 @@ async function createChart(event) {
     };
     
     document.querySelector('.new-chart').addEventListener('submit', createChart);
+
+
+    Step 3
+var svg = d3.select("svg");
+let svg = document.getElementById("pie-chart");
+let width = svg.getAttribute("width");
+let height = svg.getAttribute("height");
+let radius = 200;
