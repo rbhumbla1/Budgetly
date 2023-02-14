@@ -18,7 +18,8 @@ const addNewGoal = async (category, amount) => {
   if (response.ok) {
     document.location.replace('/api/budgets/goals');
   } else {
-    alert('Failed to add the goal.');
+    console.log(response);
+    alert('Failed to add the goal. If goal for this category already exists, use update action to change the amount.');
   }
 }
 

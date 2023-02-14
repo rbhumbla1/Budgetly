@@ -2,71 +2,72 @@ const router = require('express').Router();
 const { Budget, User, BudgetCategory } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// Get all budgets
-router.get('/',  withAuth, async (req, res) => {
-    try {
-      const budgetData = await Budget.findAll({ where: { user_id: req.session.user_id },
-        attributes:['category_id','amount','date_created'] 
-      });
+// Get all budgets for a user
+router.get('/', withAuth, async (req, res) => {
+  try {
+    const budgetData = await Budget.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id', 'amount', 'date_created']
+    });
 
-      // Get Budget cateories
-      const nameData = await BudgetCategory.findAll({
-        attributes: ['category'],
-      });
-      const names = nameData.map((name) => name.get({ plain: true }));
-    
-      const budgets = budgetData.map((budget) => budget.get({ plain: true }));
-     
-      //add category_name to the data send to goals.handlebar for displaying
-      budgets.forEach((budget) => {
-        budget.category_name = names[budget.category_id - 1].category;
-      });
+    // Get Budget cateories
+    const nameData = await BudgetCategory.findAll({
+      attributes: ['category'],
+    });
+    const names = nameData.map((name) => name.get({ plain: true }));
 
-      console.log("*********BUDGET", budgets);
-      res.status(200).json(budgets);
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
 
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    //add category_name to the data send to goals.handlebar for displaying
+    budgets.forEach((budget) => {
+      budget.category_name = names[budget.category_id - 1].category;
+    });
+
+    res.status(200).json(budgets);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // Added a route to get data to diaply budget goals for a user
 router.get('/goals', withAuth, async (req, res) => {
-  
+
   try {
 
     //Get current budgets goals for the user
 
-      const budgetData = await Budget.findAll({ where: { user_id: req.session.user_id },
-        attributes:['category_id','amount','date_created'] 
-      });
-  
-  
-       //Get the User Data
-       const userData = await User.findByPk(req.session.user_id, {
-        attributes:  ['name'] 
-      });
-      const user = userData.get({plain:true})
-  
+    const budgetData = await Budget.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id', 'amount', 'date_created']
+    });
 
-      // Get Budget cateories
-      const nameData = await BudgetCategory.findAll({
-        attributes: ['category'],
-      });
-      const names = nameData.map((name) => name.get({ plain: true }));
-    
-      const budgets = budgetData.map((budget) => budget.get({ plain: true }));
-     
-      //add category_name to the data send to goals.handlebar for displaying
-      budgets.forEach((budget) => {
-        budget.category_name = names[budget.category_id - 1].category;
-      });
-      
-      //call the goals.handlebar to display
-      res.render('goals', {
-        budgets, user,
-        logged_in: true,
-      });
+
+    //Get the User Data
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: ['name']
+    });
+    const user = userData.get({ plain: true })
+
+
+    // Get Budget cateories
+    const nameData = await BudgetCategory.findAll({
+      attributes: ['category'],
+    });
+    const names = nameData.map((name) => name.get({ plain: true }));
+
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+
+    //add category_name to the data send to goals.handlebar for displaying
+    budgets.forEach((budget) => {
+      budget.category_name = names[budget.category_id - 1].category;
+    });
+
+    //call the goals.handlebar to display
+    res.render('goals', {
+      budgets, user,
+      logged_in: true,
+    });
 
   } catch (err) {
     res.status(500).json(err);
@@ -97,19 +98,41 @@ router.get('/:id', async (req, res) => {
 // Create a budget
 router.post('/', withAuth, async (req, res) => {
   try {
-    const budgetData = await Budget.create({
-        amount: req.body.amount,
-        category_id: req.body.category,
-        user_id: req.session.user_id
+    //check if goal for this category exists.  Create new if it doesn't exist
+    const budgetData = await Budget.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id']
     });
 
-    if(!budgetData){
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+
+    let exists = false;
+
+    //return if you fins already existing goal
+    for (let i = 0; i < budgets.length; i++) {
+      if (parseInt(budgets[i].category_id) === parseInt(req.body.category)) {
+        exists = true;
+      }
+    };
+
+    if (exists) {
+      res.status(404).json({ message: 'Budget goal for this category exists.  Please use Update action to change the amount.' });
+      return;
+    }
+
+    //otherwise create new one
+    const newBudget = await Budget.create({
+      amount: req.body.amount,
+      category_id: req.body.category,
+      user_id: req.session.user_id
+    });
+
+    if (!newBudget) {
       res.status(404).json({ message: 'New budget goal creation failed' });
       return;
     }
 
-
-    res.status(200).json(budgetData);
+    res.status(200).json(newBudget);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -117,28 +140,28 @@ router.post('/', withAuth, async (req, res) => {
 
 // Update a budget
 router.put('/:id', withAuth, async (req, res) => {
-    try {
-      const budgetData = await Budget.update({amount: req.body.amount}, {
-        where: {
-          category_id: req.params.id,
-          user_id: req.session.user_id
-        },
-        individualHooks: true
-      });
-      if (!budgetData[0]) {
-        res.status(404).json({ message: 'No budget with this category and user!' });
-        return;
-      }
-      res.status(200).json(budgetData);
-    } catch (err) {
-      res.status(500).json(err);
+  try {
+    const budgetData = await Budget.update({ amount: req.body.amount }, {
+      where: {
+        category_id: req.params.id,
+        user_id: req.session.user_id
+      },
+      individualHooks: true
+    });
+    if (!budgetData[0]) {
+      res.status(404).json({ message: 'No budget with this category and user!' });
+      return;
     }
+    res.status(200).json(budgetData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // Delete a budget
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-   
+
     const budgetData = await Budget.destroy({
       where: {
         amount: req.body.amount,
