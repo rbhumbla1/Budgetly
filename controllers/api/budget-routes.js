@@ -20,10 +20,18 @@ router.get('/goals', withAuth, async (req, res) => {
   try {
 
     //Get current budgets goals for the user
-    const budgetData = await Budget.findAll({ where: { user_id: req.session.user_id } },
-      {
-        attributes: ['category_id', 'amount'],
+
+      const budgetData = await Budget.findAll({ where: { user_id: req.session.user_id },
+        attributes:['category_id','amount','date_created'] 
       });
+  
+  
+       //Get the User Data
+       const userData = await User.findByPk(req.session.user_id, {
+        attributes:  ['name'] 
+      });
+      const user = userData.get({plain:true})
+  
 
       // Get Budget cateories
       const nameData = await BudgetCategory.findAll({
@@ -40,7 +48,7 @@ router.get('/goals', withAuth, async (req, res) => {
       
       //call the goals.handlebar to display
       res.render('goals', {
-        budgets,
+        budgets, user,
         logged_in: true,
       });
 
