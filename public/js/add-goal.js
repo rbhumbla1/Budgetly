@@ -3,6 +3,11 @@ const addGoal = document.getElementById('inlineCheckbox1');
 const updateGoal = document.getElementById('inlineCheckbox2');
 const deleteGoal = document.getElementById('inlineCheckbox3');
 
+const clickButton = document.getElementById('clickButton');
+
+
+// const clickButton = document.getElementById('clickButton');
+
 const addNewGoal = async (category, amount) => {
   const response = await fetch(`/api/budgets`, {
     method: 'POST',
@@ -15,11 +20,11 @@ const addNewGoal = async (category, amount) => {
     },
   });
 
-  if (response.ok) {
-    document.location.replace('/api/budgets/goals');
-  } else {
-    alert('Failed to add the goal.');
-  }
+  // if (response.ok) {
+  //   document.location.replace('/api/budgets/goals');
+  // } else {
+  //   alert('Failed to add the goal.');
+  // }
 }
 
 const updateExistingGoal = async (category, amount) => {
@@ -73,7 +78,24 @@ const newFormHandler = async (e) => {
   }else{
     alert("Please select one of the actions before clicking the Submit button.");
   }
+
+  comparisons(category, amount)
+
+};
+
+
+const comparisons = async (category, amount) => {
+  // console.log(category);
+  // console.log(amount);
+  const expenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
+  console.log(expenses);
+  console.log(expenses[0].category)
+  alert(expenses[0].category)
 }
 
-formNewGoal.addEventListener('submit', newFormHandler);
+
+
+
+clickButton.addEventListener('click', comparisons);
+
 
