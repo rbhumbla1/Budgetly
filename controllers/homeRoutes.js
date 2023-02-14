@@ -48,4 +48,8 @@ router.get('/goals', (req, res) => {
   res.render('goals');
 });
 
+router.get('/expense', (req, res) => {
+  res.render('expense');
+});
+
 module.exports = router;
