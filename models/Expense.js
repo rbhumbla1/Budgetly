@@ -11,20 +11,11 @@ Expense.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        savings: {
+        amount_spent: {
             type: DataTypes.FLOAT,
         },
-        house_loan: {
-            type: DataTypes.FLOAT,
-        },
-        food: {
-            type: DataTypes.FLOAT,
-        },
-        transportation: {
-            type: DataTypes.FLOAT,
-        },
-        personal: {
-            type: DataTypes.FLOAT,
+        note: {
+            type: DataTypes.STRING(100),
         },
         amountSpent: {
             type: DataTypes.FLOAT,

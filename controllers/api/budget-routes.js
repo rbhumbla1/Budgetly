@@ -159,16 +159,15 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // Delete a budget
+// Delete a budget
 router.delete('/:id', withAuth, async (req, res) => {
+  console.log(req.params.id)
   try {
+   
+    const budgetData = await Budget.destroy({where: {
+      category_id: req.params.id,
+    }});
 
-    const budgetData = await Budget.destroy({
-      where: {
-        amount: req.body.amount,
-        category_id: req.params.id,
-        user_id: req.session.user_id
-      },
-    });
     if (!budgetData) {
       res.status(404).json({ message: 'No budget with this category and user!' });
       return;
@@ -178,5 +177,6 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;
