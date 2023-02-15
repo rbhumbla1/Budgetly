@@ -9,6 +9,9 @@ var noteEl = '';
 var priceEl = '';
 
 const addNewExpense = async (category, note, amount, date) => {
+
+  console.log("IN addNewExp");
+
   const response = await fetch(`/api/expenses`, {
     method: 'POST',
     body: JSON.stringify({
@@ -31,38 +34,38 @@ const addNewExpense = async (category, note, amount, date) => {
 
 
 // Display list of expenses
-const generateExpenses = async (categoryChoice, note, amount, date) => {
-    savedExpenses.textContent = [];
-    const expenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
+// const generateExpenses = async (categoryChoice, note, amount, date) => {
+//     savedExpenses.textContent = [];
+//     const expenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
     
-    for (i = 0; i < expenses.length; i++){
-        const newExpense = document.createElement("div");
-        const expenseList = document.createElement("ul");
-        const newDate = document.createElement("li");
-        const newCat = document.createElement("li");
-        const newPrice = document.createElement("li");
-        const newNote = document.createElement("p");
+//     for (i = 0; i < expenses.length; i++){
+//         const newExpense = document.createElement("div");
+//         const expenseList = document.createElement("ul");
+//         const newDate = document.createElement("li");
+//         const newCat = document.createElement("li");
+//         const newPrice = document.createElement("li");
+//         const newNote = document.createElement("p");
 
-        newExpense.setAttribute('class', 'expenseItem');
-        expenseList.setAttribute('class', 'expenseList');
-        newNote.setAttribute('class', 'noteItem');
+//         newExpense.setAttribute('class', 'expenseItem');
+//         expenseList.setAttribute('class', 'expenseList');
+//         newNote.setAttribute('class', 'noteItem');
 
-        newDate.append(expenses[i].date);
-        newCat.append(expenses[i].category);
-        newPrice.append('$'+expenses[i].amount);
-        newNote.append(expenses[i].note);
+//         newDate.append(expenses[i].date);
+//         newCat.append(expenses[i].category);
+//         newPrice.append('$'+expenses[i].amount);
+//         newNote.append(expenses[i].note);
 
-        expenseList.append(newDate);
-        expenseList.append(newCat);
-        expenseList.append(newPrice);
-        newExpense.append(expenseList);
-        newExpense.append(newNote);
+//         expenseList.append(newDate);
+//         expenseList.append(newCat);
+//         expenseList.append(newPrice);
+//         newExpense.append(expenseList);
+//         newExpense.append(newNote);
 
-        savedExpenses.appendChild(newExpense);
+//         savedExpenses.appendChild(newExpense);
 
-        clearInput();
-    }
-};
+//         clearInput();
+//     }
+// };
 
 let foodSum = 0;
 let houseSum = 0;
@@ -176,7 +179,8 @@ const newFormHandler = async (e) => {
      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
      var yyyy = today.getFullYear();
      today = mm + '/' + dd + '/' + yyyy;
-     // console.log(today);
+
+     console.log("IN newForm");
  
      const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
      const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
@@ -191,8 +195,7 @@ const newFormHandler = async (e) => {
      const date = today;
 
     addNewExpense(category, note, amount, date);
-
 };
 
 
-addNewExp.addEventListener('click', saveExpenses);
+addNewExp.addEventListener('click', newFormHandler);

@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 // Get a single expense
 router.get('/:id', async (req, res) => {
   try {
-    const expenseData = await Expense.findByPk(req.params.id, {
+    const expenseData = await Expense.findByPk({where: { id: req.session.user_id},
       include: [{ model: User }],
     });
 
@@ -34,7 +34,8 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create an expense
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
+  console.log("In post", req.body)
   try {
     const expenseData = await Expense.create({
         expense_id: req.body.expense_id,
@@ -83,37 +84,40 @@ router.delete('/:id', async (req, res) => {
 });
 
 
-// Added a route to get data to diaply budget goals for a user
+// Added a route to get data to display expenses for a user
 router.get('/spending', withAuth, async (req, res) => {
-  
+  console.log("In spending route")
   try {
-
-    //Get current budgets goals for the user
-      const expenseData = await Expense.findAll({ where: { user_id: req.session.user_id },
-        attributes:['category_id','amount','date_created'] 
+    // console.log("In spending route")
+    //Get current expenses for the user
+      const expenseData = await Expense.findAll({ where: { id: req.session.user_id },
+        // attributes:['category_id', 'note', 'amountSpent', 'date_created'] 
       });
+    
        //Get the User Data
-       const userData = await User.findByPk(req.session.user_id, {
-        attributes:  ['name'] 
-      });
-      const user = userData.get({plain:true})
+      //  const userData = await User.findByPk(req.session.user_id, {
+      //   attributes:  ['name'] 
+      // });
+
+      // const user = userData.get({plain:true})
   
-      // Get Budget cateories
+      // Get Expense categories
       const nameData = await BudgetCategory.findAll({
         attributes: ['category'],
       });
       const names = nameData.map((name) => name.get({ plain: true }));
-    
-      const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+
+      const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+      console.log("expenses", expenses);
      
       //add category_name to the data send to goals.handlebar for displaying
-      budgets.forEach((budget) => {
-        budget.category_name = names[budget.category_id - 1].category;
+      expenses.forEach((expense) => {
+        expense.category_name = names[expense.category_id - 1].category;
       });
       
-      //call the goals.handlebar to display
-      res.render('goals', {
-        budgets, user,
+      //call the expeneses.handlebar to display
+      res.render('expenses', {
+        expenses, user,
         logged_in: true,
       });
 
@@ -122,8 +126,6 @@ router.get('/spending', withAuth, async (req, res) => {
   }
 
 });
-
-
 
 
 module.exports = router;

@@ -26,6 +26,12 @@ Expense.init(
         personal: {
             type: DataTypes.FLOAT,
         },
+        amountSpent: {
+            type: DataTypes.FLOAT,
+        },
+        note: {
+            type: DataTypes.STRING,
+        },
         date_created: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -35,6 +41,13 @@ Expense.init(
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
+                key: 'id',
+            },
+        },
+        category_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'budget_category',
                 key: 'id',
             },
         },
