@@ -44,9 +44,25 @@ const getData = async () => {
             .attr("transform", function (d) {
                 return "translate(" + label.centroid(d) + ")";
             })
-            .text(function (d) { return d.data.category_name; })
+            .attr("dy", "0em")
+            .text(function (d) { return d.data.category_name })
+            .style("text-anchor", "middle")
             .style("font-family", "arial")
-            .style("font-size", 15);
+            .style("font-size", 15)
+
+        arc.append("text")
+            .attr("transform", function (d) {
+                return "translate(" + label.centroid(d) + ")";
+            })
+            .attr("dy", "1em")
+            .text(function (d) { return ' $' + d.data.amount})
+            .style("text-anchor", "middle")
+            .style("font-family", "arial")
+            .style("font-size", 15) 
+        
+        
+
+
     } else {
         console.log("get failed");
     }

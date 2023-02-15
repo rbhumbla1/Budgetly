@@ -1,4 +1,5 @@
 
+/* route http://localhost:3001/ */
 
 .welcome-page {
     margin: auto;
@@ -28,10 +29,13 @@
 
 .logo {
     border-left: 3px double rgb(55, 224, 247);
-    background-image: url("/image/logo.png");
-    width: 40vw;
+    background-image: url("/image/coins-icon.jpeg");
+    background-size: 200px 200px;
+    width: 30vw;
     background-repeat: no-repeat;
     background-position: center;
    
 }
+
+
 

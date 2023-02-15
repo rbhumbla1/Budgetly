@@ -1,38 +1,28 @@
-<div class="nav">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
-        aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Menu
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" id='logout-button' href="#">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
+<div class="nav">
+        <nav class="navbar navbar-light" id="navbar">
+          <h2 id="budgetly">Budgetly</h2>
+          <form class="form-inline">
+            <button class="btn btn-sm btn-outline-secondary" type="button">Home</button>
+            <button class="btn btn-sm btn-outline-secondary" type="button">Dashboard</button>
+            <button class="btn btn-sm btn-outline-secondary" type="button">Account</button>
+          </form>
+        </nav>
 </div>
 </header>
 <main>
   <div class="parent">
     <div class="chart">
-      <div>Monthly Spending</div>
+            <div class="welcome-div" id="title">
+        <h1>Monthly Spending</h1>
+        </div>
       <svg id="pie-chart" width="500" height="400"></svg>
     </div>
 
+        
     <div class="goals">
-      My Goals
+      <div class="welcome-div" id="title">
+        <h1>My Goals</h1>
 
       {{!-- Display Budget Goals of the user --}}
 
@@ -125,4 +115,5 @@
 <script src="/js/pie-chart.js"></script>
 <script src="/js/add-goal.js"></script>
 <script src='/js/logout.js'></script>
+
 </div>
