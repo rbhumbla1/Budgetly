@@ -77,3 +77,28 @@ const newFormHandler = async (e) => {
 
 formNewGoal.addEventListener('submit', newFormHandler);
 
+
+const delBtn = document.querySelectorAll('.del-btn')
+
+for(let i = 0; i < delBtn.length; i++) {
+  delBtn[i].addEventListener("click", async (e)=>{
+    let currentCategory = e.target.getAttribute('data-id')
+
+    console.log(currentCategory)
+    const response = await fetch(`/api/budgets/${currentCategory}`, {
+      method: 'DELETE',
+    });
+  
+    if (response.ok) {
+      document.location.replace('/api/budgets/goals');
+    } else {
+      alert('Failed to delete the goal.');
+    }
+    
+  
+  })
+
+}
+
+
+
