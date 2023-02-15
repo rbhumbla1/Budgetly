@@ -1,6 +1,9 @@
+/* route http://localhost:3001/api/budgets/goals */
+
 * {
     margin: 2px;
 }
+
 
 :root {
     --fontcolor: rgb(55, 224, 247);
@@ -12,12 +15,23 @@ h1 {
 }
 
 .navbar {
+    display: flex;
+    top: 0;
+    width: 100%;
+}
+
+.nav {
+    
+    position: fixed;
+    top: 0;
     width: 100%;
 }
 
 .parent {
+    margin-top: 75px;
+    margin-bottom: 50px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
 
 }
 
@@ -35,14 +49,11 @@ h1 {
 }
 
 .goals {
-    color: var(--fontcolor);
+    color: black;
     font-weight: 250;
     border: solid rgb(210, 210, 210);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
-    
-    
-
 }
 
 .goal-button {
@@ -55,8 +66,8 @@ h1 {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: black;
-    color: lightslategray;
+    background-color: var(--fontcolor);
+    color: white;
     text-align: center;
     
 }
@@ -70,11 +81,12 @@ h5{
     color: rgb(55, 224, 247);
 }
 
-h7{
+h7 {
     font-size: 10px;
 }
 
 .navbar{
+    position: fixed;
     color: white;
     background-color: rgb(116, 219, 233);
     border-radius: 5px;
@@ -141,5 +153,12 @@ p{
     color: rgb(112, 106, 106);
 }
 
-
-
+@media (max-width: 1050px) {
+    .parent {
+        margin-top: 75px;
+        margin-bottom: 50px;
+        display: grid;
+        grid-template-columns: auto;
+    }
+    
+}

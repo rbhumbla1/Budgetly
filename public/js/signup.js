@@ -25,7 +25,7 @@ const signupForm = async (e) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/expenses');
 
         //NEEDS FIX,
         // WHEN SUBMIT CLICKED, IT SHOULD GO STRAIGHT TO PROFILE, INSTEAD IT GOES TO LOG IN PAGE

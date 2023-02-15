@@ -23,7 +23,8 @@ const loginHandler = async (e) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      //document.location.replace('/profile');
+      document.location.replace('/api/budgets/goals');
     } else {
       incorrect.innerHTML = 'Incorrect Email/Password';
     }
