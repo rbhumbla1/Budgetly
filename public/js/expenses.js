@@ -8,8 +8,6 @@ var catEl = '';
 var noteEl = '';
 var priceEl = '';
 
-
-
 const addNewExpense = async (category, note, amount, date) => {
   const response = await fetch(`/api/expenses`, {
     method: 'POST',

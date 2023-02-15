@@ -79,6 +79,15 @@
             </section>
         </form>
     </main>
+    <script>
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+          var yyyy = today.getFullYear();
+          today = mm + '/' + dd + '/' + yyyy;
+          const currentDay = document.getElementById('currentDay')
+          currentDay.textContent += today;
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
       integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

@@ -67,15 +67,15 @@ const newFormHandler = async (e) => {
   const category = document.getElementById('category').value.trim();
   const amount = document.getElementById('amount').value.trim();
 
-  // const expenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
-  // const BudgetAmount = document.getElementById('amount').value.trim();
+  const expenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
+  const BudgetAmount = document.getElementById('amount').value.trim();
 
-  // console.log(expenses);
-  // console.log(expenses[0].amount)
-  // console.log(BudgetAmount)
+  console.log(expenses);
+  console.log(expenses[0].amount)
+  console.log(BudgetAmount)
 
-  // const fundRemaining = BudgetAmount - expenses[0].amount
-  // console.log(fundRemaining)
+  const fundRemaining = BudgetAmount - expenses[0].amount
+  console.log(fundRemaining)
 
 
   if (addGoal.checked) {
@@ -88,7 +88,7 @@ const newFormHandler = async (e) => {
     alert("Please select one of the actions before clicking the Submit button.");
   }
 
-  comparisons(category, amount, fund)
+  // comparisons(category, amount, fundRemaining)
 
 };
 

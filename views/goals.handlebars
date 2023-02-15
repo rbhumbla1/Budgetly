@@ -113,6 +113,7 @@
                   <th scope="col">Budget Category</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Date Created</th>
+                  <th scope="col">Fund Remaining</th>
                 </tr>
               </thead>
               <tbody>
@@ -121,6 +122,7 @@
                   <td>{{Budget.category_name}}</td>
                   <td>${{Budget.amount}}</td>
                   <td>{{format_time Budget.date_created}}</td>
+                  <td>${{Budget.fundRemaining}}</td>
                 </tr>
                 {{/each}}
               </tbody>
@@ -176,10 +178,6 @@
         <div class="goal-button">
           <button type="button" class="btn btn-outline-info" id="clickButton">+</button>
         </div>
-         {{!-- added button for testing --}}
-        {{!-- <div class="goal-button">
-          <button type="button"class="btn btn-outline-info" id="clickButton">click</button>
-        </div> --}}
     </div>
     </form>
 

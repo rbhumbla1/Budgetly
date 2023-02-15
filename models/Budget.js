@@ -14,6 +14,9 @@ Budget.init(
         amount: {
             type: DataTypes.FLOAT,
         },
+        fundRemaining: {
+            type: DataTypes.FLOAT,
+        },
         date_created: {
             type: DataTypes.DATE,
             allowNull: false,
