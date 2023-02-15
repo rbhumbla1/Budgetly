@@ -1,4 +1,4 @@
-const addNewExpense = document.getElementById('saveButton');
+const addNewExp = document.getElementById('saveButton');
 const savedExpenses = document.getElementById('savedExpenses');
 
 var cardBlockDiv = '';
@@ -7,6 +7,30 @@ var dateEl = '';
 var catEl = '';
 var noteEl = '';
 var priceEl = '';
+
+
+
+const addNewExpense = async (category, note, amount, date) => {
+  const response = await fetch(`/api/expenses`, {
+    method: 'POST',
+    body: JSON.stringify({
+      category,
+      note,
+      amount,
+      date,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    document.location.replace('/api/expenses/spending');
+  } else {
+    alert('Failed to add expense.');
+  }
+};
+
 
 // Display list of expenses
 const generateExpenses = async (categoryChoice, note, amount, date) => {
@@ -37,6 +61,8 @@ const generateExpenses = async (categoryChoice, note, amount, date) => {
         newExpense.append(newNote);
 
         savedExpenses.appendChild(newExpense);
+
+        clearInput();
     }
 };
 
@@ -70,6 +96,7 @@ const saveExpenses = async (event) => {
     const note = document.getElementById('note').value.trim();
     const amount = document.getElementById('amount').value.trim();
     const date = today;
+    // console.log(date)
 
     let price = parseInt(amount);
 
@@ -128,5 +155,46 @@ const saveExpenses = async (event) => {
     // console.log(thisExpense)
 };
 
+const clearInput = () => {
+  // let input1 = document.getElementById('category');
+  // input1.value = "Select a Category";
+  // let input2 = document.getElementById('note');
+  // input2.value = "";
+  // let input3 = document.getElementById('amount');
+  // input3.display = hide;
+}
 
-addNewExpense.addEventListener('click', saveExpenses);
+// window.onload = function() {
+//   localStorage.setItem("savedExpenses", $('#inputName').val());
+//   localStorage.setItem("expenseSums", $('#inputEmail').val());   
+// }
+
+const newFormHandler = async (e) => {
+  e.preventDefault();
+
+     //Display today's date
+     var today = new Date();
+     var dd = String(today.getDate()).padStart(2, '0');
+     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+     var yyyy = today.getFullYear();
+     today = mm + '/' + dd + '/' + yyyy;
+     // console.log(today);
+ 
+     const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
+     const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
+ 
+     if(savedExpenses.length == 50){
+         savedExpenses.shift();
+     }
+ 
+     const category = document.getElementById('category').value.trim();
+     const note = document.getElementById('note').value.trim();
+     const amount = document.getElementById('amount').value.trim();
+     const date = today;
+
+    addNewExpense(category, note, amount, date);
+
+};
+
+
+addNewExp.addEventListener('click', saveExpenses);
