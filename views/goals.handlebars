@@ -36,6 +36,7 @@
                   <th scope="col">Budget Category</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Date Created</th>
+                  <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,6 +45,7 @@
                   <td>{{Budget.category_name}}</td>
                   <td>${{Budget.amount}}</td>
                   <td>{{format_time Budget.date_created}}</td>
+                  <td><button data-id="{{Budget.category_id}}" class="del-btn">Delete</button></td>
                 </tr>
                 {{/each}}
               </tbody>
@@ -60,18 +62,13 @@
       </div>
       {{!-- Radio button for various actions --}}
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="goalAction" id="inlineCheckbox1" value="addGoal">
+        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="addGoal" name="box">
         <label class="form-check-label" for="inlineCheckbox1">Add a New Goal</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="goalAction" id="inlineCheckbox2" value="updateGoal">
+        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="updateGoal" name="box">
         <label class="form-check-label" for="inlineCheckbox2">Update a Goal</label>
       </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="goalAction" id="inlineCheckbox3" value="deleteGoal">
-        <label class="form-check-label" for="inlineCheckbox3">Delete a Goal</label>
-      </div>
-
       {{!-- Form to get goal information --}}
       <form id='form-new-goal' class='new-goal-form'>
         <div id="amt-label">

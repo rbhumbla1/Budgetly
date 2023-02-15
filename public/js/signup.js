@@ -25,6 +25,7 @@ const signupForm = async (e) => {
     });
 
     if (response.ok) {
+
       document.location.replace('/expenses');
 
         //NEEDS FIX,
