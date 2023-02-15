@@ -1,16 +1,15 @@
 [
     {
-        "amount": "150.00",
-        "note": "For new iPad",
-        "user_id": "1",
-    "category_id": "2"
-        
+      "amount_spent": "50.00",
+      "note": "Grocery",
+      "user_id": "1",
+      "category_id": "1"
     },
     {
-        "amount": "150.00",
-        "note": "I want to travel",
-        "user_id": "1",
-    "category_id": "2"
+      "amount_spent": "500.00",
+      "note": "Loan paid",
+      "user_id": "1",
+      "category_id": "2"
     }
-]
+  ]
 

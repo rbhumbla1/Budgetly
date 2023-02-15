@@ -13,11 +13,14 @@ Expense.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        amountspent: {
+        amount_spent: {
             type: DataTypes.FLOAT,
         },
         note: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
+        },
+        date_created: {
+            type: DataTypes.DATE,
             allowNull: false,
       
         },

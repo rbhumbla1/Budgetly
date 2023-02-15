@@ -12,7 +12,7 @@ Budget.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
-User.hasOne(Expense, {
+User.hasMany(Expense, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 });
@@ -33,8 +33,16 @@ Budget.belongsTo(BudgetCategory, {
     foreignKey: 'category_id'
 });
 
+Expense.belongsTo(BudgetCategory, {
+    foreignKey: 'category_id'
+});
 
 BudgetCategory.hasMany(Budget, {
+    foreignKey: 'category_id',
+    onDelete: 'CASCADE'
+});
+
+BudgetCategory.hasMany(Expense, {
     foreignKey: 'category_id',
     onDelete: 'CASCADE'
 });
