@@ -10,7 +10,7 @@ var priceEl = '';
 
 const addNewExpense = async (category, note, amount, date) => {
 
-  console.log("IN addNewExp");
+  console.log("***************IN addNewExp");
 
   const response = await fetch(`/api/expenses`, {
     method: 'POST',
@@ -26,11 +26,61 @@ const addNewExpense = async (category, note, amount, date) => {
   });
 
   if (response.ok) {
-    document.location.replace('/api/expenses/spending');
+    document.location.replace('/expenses');
   } else {
-    alert('Failed to add expense.');
+    alert('Failed to add expense. Make sure you select a category.');
   }
 };
+
+const newFormHandler = async (e) => {
+  e.preventDefault();
+
+     //Display today's date
+     var today = new Date();
+     var dd = String(today.getDate()).padStart(2, '0');
+     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+     var yyyy = today.getFullYear();
+     today = mm + '/' + dd + '/' + yyyy;
+
+     console.log("IN newForm");
+ 
+     const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
+     const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
+ 
+     if(savedExpenses.length == 50){
+         savedExpenses.shift();
+     }
+ 
+     const category = document.getElementById('category').value.trim();
+     const note = document.getElementById('note').value.trim();
+     const amount = document.getElementById('amount').value.trim();
+     const date = today;
+
+    addNewExpense(category, note, amount, date);
+};
+
+
+addNewExp.addEventListener('click', newFormHandler);
+
+//Clicking on Goals button will take the user to expense page
+const goals = document.getElementById("goals-button")
+
+goals.addEventListener("click",  async ()=> {
+    const response = await fetch("/api/budgets/goals", {
+        method:'GET',
+        header: {
+             'Content-Type': 'application/json' 
+        }
+    })
+    if (response.ok) {
+      document.location.replace('/api/budgets/goals');
+      } else {
+        alert(response.statusText);
+      }
+})
+
+
+// #################################### OLD CODE
 
 
 // Display list of expenses
@@ -170,49 +220,3 @@ const clearInput = () => {
 //   localStorage.setItem("expenseSums", $('#inputEmail').val());   
 // }
 
-const newFormHandler = async (e) => {
-  e.preventDefault();
-
-     //Display today's date
-     var today = new Date();
-     var dd = String(today.getDate()).padStart(2, '0');
-     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
-     var yyyy = today.getFullYear();
-     today = mm + '/' + dd + '/' + yyyy;
-
-     console.log("IN newForm");
- 
-     const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
-     const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
- 
-     if(savedExpenses.length == 50){
-         savedExpenses.shift();
-     }
- 
-     const category = document.getElementById('category').value.trim();
-     const note = document.getElementById('note').value.trim();
-     const amount = document.getElementById('amount').value.trim();
-     const date = today;
-
-    addNewExpense(category, note, amount, date);
-};
-
-
-addNewExp.addEventListener('click', newFormHandler);
-
-//Clicking on Goals button will take the user to expense page
-const goals = document.getElementById("goals-button")
-
-goals.addEventListener("click",  async ()=> {
-    const response = await fetch("/api/budgets/goals", {
-        method:'GET',
-        header: {
-             'Content-Type': 'application/json' 
-        }
-    })
-    if (response.ok) {
-      document.location.replace('/api/budgets/goals');
-      } else {
-        alert(response.statusText);
-      }
-})

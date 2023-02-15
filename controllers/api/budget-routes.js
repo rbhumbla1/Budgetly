@@ -97,7 +97,7 @@ router.get('/:id', withAuth, async (req, res) => {
 
 // Create a budget
 router.post('/', withAuth, async (req, res) => {
-  console.log("***IN POST", req);
+
   try {
     //check if goal for this category exists.  Create new if it doesn't exist
     const budgetData = await Budget.findAll({
