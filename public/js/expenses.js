@@ -199,3 +199,20 @@ const newFormHandler = async (e) => {
 
 
 addNewExp.addEventListener('click', newFormHandler);
+
+//Clicking on Goals button will take the user to expense page
+const goals = document.getElementById("goals-button")
+
+goals.addEventListener("click",  async ()=> {
+    const response = await fetch("/api/budgets/goals", {
+        method:'GET',
+        header: {
+             'Content-Type': 'application/json' 
+        }
+    })
+    if (response.ok) {
+      document.location.replace('/api/budgets/goals');
+      } else {
+        alert(response.statusText);
+      }
+})

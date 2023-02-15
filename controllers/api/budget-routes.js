@@ -30,7 +30,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-// Added a route to get data to diaply budget goals for a user
+// Added a route to get data to display budget goals for a user
 router.get('/goals', withAuth, async (req, res) => {
 
   try {
@@ -39,7 +39,7 @@ router.get('/goals', withAuth, async (req, res) => {
 
     const budgetData = await Budget.findAll({
       where: { user_id: req.session.user_id },
-      attributes: ['category_id', 'amount', 'date_created']
+      attributes: ['category_id', 'amount', 'fund_remaining', 'date_created']
     });
 
     //Get the User Data
@@ -74,19 +74,20 @@ router.get('/goals', withAuth, async (req, res) => {
 
 });
 
-// Get a single budget
-router.get('/:id', async (req, res) => {
+// Get a budget with given category_id and user_id
+router.get('/:id', withAuth, async (req, res) => {
   console.log(req.body)
   try {
-    const budgetData = await Budget.findByPk(req.params.id, {
-      include: [{ model: User }, { model: BudgetCategory }],
+    const budgetData = await Budget.findAll({
+      where: { user_id: req.session.user_id, category_id: req.params.id },
+      attributes: ['amount', 'fund_remaining']
     });
 
-    if (!budgetData) {
-      res.status(404).json({ message: 'No budget found with that id!' });
-      return;
-    }
-    res.status(200).json(budgetData);
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+    console.log("**********Get CAT", budgets)
+
+    res.status(200).json(budgets);
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -96,6 +97,7 @@ router.get('/:id', async (req, res) => {
 
 // Create a budget
 router.post('/', withAuth, async (req, res) => {
+  console.log("***IN POST", req);
   try {
     //check if goal for this category exists.  Create new if it doesn't exist
     const budgetData = await Budget.findAll({
@@ -107,7 +109,7 @@ router.post('/', withAuth, async (req, res) => {
 
     let exists = false;
 
-    //return if you fins already existing goal
+    //return if you find an already existing goal
     for (let i = 0; i < budgets.length; i++) {
       if (parseInt(budgets[i].category_id) === parseInt(req.body.category)) {
         exists = true;
@@ -122,6 +124,7 @@ router.post('/', withAuth, async (req, res) => {
     //otherwise create new one
     const newBudget = await Budget.create({
       amount: req.body.amount,
+      fund_remaining: req.body.fund_remaining,
       category_id: req.body.category,
       user_id: req.session.user_id
     });
