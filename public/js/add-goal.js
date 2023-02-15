@@ -39,7 +39,7 @@ const updateExistingGoal = async (category, amount) => {
   if (response.ok) {
     document.location.replace('/api/budgets/goals');
   } else {
-    alert('Failed to update the  goal.');
+    alert('Failed to update a non-existing code.  Please add a goal for this category.');
   }
 }
 
@@ -62,21 +62,6 @@ const deleteExistingGoal = async (category, amount) => {
   }
 }
 
-const displayAmount = async (show) => {
-  if (!show) {
-    alert("not show");
-    amtLabel.style.visibility = "hidden";
-    amtDiv.style.visibility = "hidden";
-    // amtLabel.style.display = "none";
-    // amtDiv.style.display = "none";
-  } else {
-    alert("show")
-    amtLabel.style.visibility = "visible";
-    amtDiv.style.visibility = "visible";
-    // amtLabel.style.display = "";
-    // amtDiv.style.display = "";
-  }
-}
 
 const newFormHandler = async (e) => {
   e.preventDefault();
@@ -85,16 +70,10 @@ const newFormHandler = async (e) => {
   const amount = document.getElementById('amount').value.trim();
 
   if (addGoal.checked) {
-    displayAmount(true);
     addNewGoal(category, amount);
   } else if (updateGoal.checked) {
-    displayAmount(true);
     updateExistingGoal(category, amount);
-  } else if (deleteGoal.checked) {
-    displayAmount(false);
-    deleteExistingGoal(category, amount);
   } else {
-    displayAmount(true);
     alert("Please select one of the actions before clicking the Submit button.");
   }
 }
