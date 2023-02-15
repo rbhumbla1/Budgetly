@@ -3,6 +3,8 @@ const sequelize = require('../config/connection');
 
 class Expense extends Model { }
 
+
+
 Expense.init(
     {
         id: {
@@ -11,30 +13,25 @@ Expense.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        savings: {
+        amountspent: {
             type: DataTypes.FLOAT,
         },
-        house_loan: {
-            type: DataTypes.FLOAT,
-        },
-        food: {
-            type: DataTypes.FLOAT,
-        },
-        transportation: {
-            type: DataTypes.FLOAT,
-        },
-        personal: {
-            type: DataTypes.FLOAT,
-        },
-        date_created: {
-            type: DataTypes.DATE,
+        note: {
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: DataTypes.NOW,
+      
         },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
+                key: 'id',
+            },
+        },
+        category_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'budget_category',
                 key: 'id',
             },
         },
@@ -49,3 +46,4 @@ Expense.init(
 );
 
 module.exports = Expense;
+

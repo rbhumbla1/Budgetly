@@ -17,6 +17,14 @@ User.hasOne(Expense, {
     onDelete: 'CASCADE'
 });
 
+Budget.hasMany(Expense, {
+    foreignKey: 'user_id'
+})
+
+Expense.belongsTo(Budget, {
+    foreignKey:'user_id'
+})
+
 Expense.belongsTo(User, {
     foreignKey: 'user_id'
 });
