@@ -19,9 +19,9 @@
         <nav class="navbar navbar-light" id="navbar">
           <h2 id="budgetly">Budgetly</h2>
           <form class="form-inline">
-            <button class="btn btn-sm btn-outline-secondary" type="button">Home</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Dashboard</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Account</button>
+            <button class="btn btn-sm btn-outline-secondary button" type="button"><a href="http://localhost:3001/goals">Dashboard</a></button>
+            <button class="btn btn-sm btn-outline-secondary button" type="button"><a href="http://localhost:3001/expenses">Expenses</a></button>
+            <button class="btn btn-sm btn-outline-secondary button" type="button"><a href="http://localhost:3001">Logout</a></button>
           </form>
         </nav>
      </header>
@@ -83,6 +83,15 @@
   <div>Budgetly</div>
 </nav>
     </main>
+    <script>
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+          var yyyy = today.getFullYear();
+          today = mm + '/' + dd + '/' + yyyy;
+          const currentDay = document.getElementById('currentDay')
+          currentDay.textContent += today;
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
       integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

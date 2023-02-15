@@ -3,9 +3,9 @@
         <nav class="navbar navbar-light" id="navbar">
           <h2 id="budgetly">Budgetly</h2>
           <form class="form-inline">
-            <button class="btn btn-sm btn-outline-secondary" type="button">Home</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Dashboard</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Account</button>
+            <button class="btn btn-sm btn-outline-secondary" type="button"><a href="http://localhost:3001/goals">Dashboard</a></button>
+            <button class="btn btn-sm btn-outline-secondary" type="button"><a href="http://localhost:3001/expenses">Expenses</a></button>
+            <button class="btn btn-sm btn-outline-secondary" type="button"><a href="http://localhost:3001">Logout</a></button>
           </form>
         </nav>
 </div>
@@ -36,6 +36,7 @@
                   <th scope="col">Budget Category</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Date Created</th>
+                  <th scope="col">Fund Remaining</th>
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
@@ -45,6 +46,7 @@
                   <td>{{Budget.category_name}}</td>
                   <td>${{Budget.amount}}</td>
                   <td>{{format_time Budget.date_created}}</td>
+                  <td>${{Budget.fundRemaining}}</td>
                   <td><button data-id="{{Budget.category_id}}" class="del-btn">Delete</button></td>
                 </tr>
                 {{/each}}
@@ -94,7 +96,7 @@
           </div>
         </div>
         <div class="goal-button">
-          <button type="submit" class="btn btn-outline-info">+</button>
+          <button type="button" class="btn btn-outline-info" id="clickButton">+</button>
         </div>
     </div>
     </form>
