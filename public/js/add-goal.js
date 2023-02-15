@@ -2,6 +2,8 @@ const formNewGoal = document.getElementById('form-new-goal');
 const addGoal = document.getElementById('inlineCheckbox1');
 const updateGoal = document.getElementById('inlineCheckbox2');
 const deleteGoal = document.getElementById('inlineCheckbox3');
+const amtLabel = document.getElementById("amt-label");
+const amtDiv = document.getElementById("amt");
 
 const addNewGoal = async (category, amount) => {
   const response = await fetch(`/api/budgets`, {
@@ -18,7 +20,8 @@ const addNewGoal = async (category, amount) => {
   if (response.ok) {
     document.location.replace('/api/budgets/goals');
   } else {
-    alert('Failed to add the goal.');
+    console.log(response);
+    alert('Failed to add the goal. If goal for this category already exists, use update action to change the amount.');
   }
 }
 
@@ -41,6 +44,7 @@ const updateExistingGoal = async (category, amount) => {
 }
 
 const deleteExistingGoal = async (category, amount) => {
+  
   const response = await fetch(`/api/budgets/${category}`, {
     method: 'DELETE',
     body: JSON.stringify({
@@ -58,6 +62,22 @@ const deleteExistingGoal = async (category, amount) => {
   }
 }
 
+const displayAmount = async (show) => {
+  if (!show) {
+    alert("not show");
+    amtLabel.style.visibility = "hidden";
+    amtDiv.style.visibility = "hidden";
+    // amtLabel.style.display = "none";
+    // amtDiv.style.display = "none";
+  } else {
+    alert("show")
+    amtLabel.style.visibility = "visible";
+    amtDiv.style.visibility = "visible";
+    // amtLabel.style.display = "";
+    // amtDiv.style.display = "";
+  }
+}
+
 const newFormHandler = async (e) => {
   e.preventDefault();
 
@@ -65,12 +85,16 @@ const newFormHandler = async (e) => {
   const amount = document.getElementById('amount').value.trim();
 
   if (addGoal.checked) {
+    displayAmount(true);
     addNewGoal(category, amount);
   } else if (updateGoal.checked) {
+    displayAmount(true);
     updateExistingGoal(category, amount);
   } else if (deleteGoal.checked) {
+    displayAmount(false);
     deleteExistingGoal(category, amount);
-  }else{
+  } else {
+    displayAmount(true);
     alert("Please select one of the actions before clicking the Submit button.");
   }
 }
