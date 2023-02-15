@@ -7,13 +7,13 @@ const amtDiv = document.getElementById("amt");
 
 const clickButton = document.getElementById('clickButton');
 
-const addNewGoal = async (category, amount, fundRemaining) => {
+const addNewGoal = async (category, amount, fund_remaining) => {
   const response = await fetch(`/api/budgets`, {
     method: 'POST',
     body: JSON.stringify({
       category,
       amount,
-      fundRemaining,
+      fund_remaining,
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -21,6 +21,7 @@ const addNewGoal = async (category, amount, fundRemaining) => {
   });
 
   if (response.ok) {
+    console.log("BACK**********", response);
     document.location.replace('/api/budgets/goals');
   } else {
     console.log(response);
@@ -29,6 +30,7 @@ const addNewGoal = async (category, amount, fundRemaining) => {
 }
 
 const updateExistingGoal = async (category, amount) => {
+
   const response = await fetch(`/api/budgets/${category}`, {
     method: 'PUT',
     body: JSON.stringify({
@@ -42,12 +44,12 @@ const updateExistingGoal = async (category, amount) => {
   if (response.ok) {
     document.location.replace('/api/budgets/goals');
   } else {
-    alert('Failed to update a non-existing code.  Please add a goal for this category.');
+    alert('Failed to update a non-existing goal.  Please add a goal for this category.');
   }
 }
 
 const deleteExistingGoal = async (category, amount) => {
-  
+
   const response = await fetch(`/api/budgets/${category}`, {
     method: 'DELETE',
     body: JSON.stringify({
@@ -83,7 +85,6 @@ const newFormHandler = async (e) => {
   // console.log(fundRemaining)
 
   if (addGoal.checked) {
-    displayAmount(true);
     addNewGoal(category, amount, amount);
   } else if (updateGoal.checked) {
     updateExistingGoal(category, amount);
@@ -115,25 +116,43 @@ clickButton.addEventListener('click', newFormHandler);
 
 const delBtn = document.querySelectorAll('.del-btn')
 
-for(let i = 0; i < delBtn.length; i++) {
-  delBtn[i].addEventListener("click", async (e)=>{
+for (let i = 0; i < delBtn.length; i++) {
+  delBtn[i].addEventListener("click", async (e) => {
     let currentCategory = e.target.getAttribute('data-id')
 
     console.log(currentCategory)
     const response = await fetch(`/api/budgets/${currentCategory}`, {
       method: 'DELETE',
     });
-  
+
     if (response.ok) {
       document.location.replace('/api/budgets/goals');
     } else {
       alert('Failed to delete the goal.');
     }
-    
-  
+
+
   })
 
 }
+
+//Clicking on Expense button will take the user to expense page
+const expense = document.getElementById("expense-button")
+
+expense.addEventListener("click", async () => {
+  const response = await fetch("/api/expenses", {
+    method: 'GET',
+    header: {
+      'Content-Type': 'application/json'
+    }
+  })
+  if (response.ok) {
+    //document.location.replace('/api/expenses/spending');
+    document.location.replace('/expenses');
+  } else {
+    alert(response.statusText);
+  }
+})
 
 
 
