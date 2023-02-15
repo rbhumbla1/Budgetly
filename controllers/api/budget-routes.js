@@ -35,13 +35,12 @@ router.get('/goals', withAuth, async (req, res) => {
 
   try {
 
-    //Get current budgets goals for the user
+    //Get current budgets goals for the user);
 
     const budgetData = await Budget.findAll({
       where: { user_id: req.session.user_id },
       attributes: ['category_id', 'amount', 'date_created']
     });
-
 
     //Get the User Data
     const userData = await User.findByPk(req.session.user_id, {
