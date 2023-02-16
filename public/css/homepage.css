@@ -1,4 +1,3 @@
-
 /* route http://localhost:3001/ */
 
 .welcome-page {
@@ -6,23 +5,25 @@
     display: flex;
     height: 80vh;
     width: 80%;
-    justify-content:space-around;
-    flex-wrap:wrap;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
-    
+
 }
+
 .welcome-container {
-    
-    display:flex;
+
+    display: flex;
     flex-direction: column;
-    align-items:center;
-    justify-content:center;
-    height: 80vh;  
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
     width: 60vh;
     font-size: 150%;
     gap: 20px;
-    
+
 }
+
 .welcome-container h1 {
     font-size: 3.0rem;
 }
@@ -34,8 +35,5 @@
     width: 30vw;
     background-repeat: no-repeat;
     background-position: center;
-   
+
 }
-
-
-

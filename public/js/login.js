@@ -9,10 +9,6 @@ const loginHandler = async (e) => {
   const email = document.getElementById('email-input').value.trim();
   const password = document.getElementById('password-input').value.trim();
 
-  //   let userInputs = {
-  //     email: emailInput.value.trim(),
-  //     password: passwordInput.value.trim(),
-  //   };
 
   if (email && password) {
     // Send a POST request to the API endpoint
@@ -23,14 +19,13 @@ const loginHandler = async (e) => {
     });
 
     if (response.ok) {
-      //document.location.replace('/profile');
+      //go to the dashboard when a user logs in
       document.location.replace('/api/budgets/goals');
     } else {
       incorrect.innerHTML = 'Incorrect Email/Password';
     }
   }
 
-  ////////////=== LOGGG INNNNNN
 };
 
 
