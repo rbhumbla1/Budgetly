@@ -107,10 +107,9 @@ router.get('/expenses', withAuth, async (req, res) => {
       expense.category_name = names[expense.category_id - 1].category;
     });
 
-
     //call the goals.handlebar to display
     res.render('expenses', {
-      expenses, user, fundleft,
+      expenses, user,
       logged_in: true,
     });
 
