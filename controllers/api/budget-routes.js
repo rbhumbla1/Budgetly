@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Budget, User, BudgetCategory } = require('../../models');
+const { Budget, User, BudgetCategory, Expense } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Get all budgets for a user
@@ -53,13 +53,22 @@ router.get('/goals', withAuth, async (req, res) => {
     const nameData = await BudgetCategory.findAll({
       attributes: ['category'],
     });
+
+    const expenseData = await Expense.findAll({
+      attributes: ['amount_spent'],
+    });
+
     const names = nameData.map((name) => name.get({ plain: true }));
 
     const budgets = budgetData.map((budget) => budget.get({ plain: true }));
 
+    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+
+
     //add category_name to the data send to goals.handlebar for displaying
     budgets.forEach((budget) => {
       budget.category_name = names[budget.category_id - 1].category;
+      budgets.fund_remaining = budgets[0].amount - expenses[0].amount_spent;
     });
 
     //call the goals.handlebar to display
@@ -161,14 +170,15 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // Delete a budget
-// Delete a budget
 router.delete('/:id', withAuth, async (req, res) => {
   console.log(req.params.id)
   try {
-   
-    const budgetData = await Budget.destroy({where: {
-      category_id: req.params.id,
-    }});
+
+    const budgetData = await Budget.destroy({
+      where: {
+        category_id: req.params.id,
+      }
+    });
 
     if (!budgetData) {
       res.status(404).json({ message: 'No budget with this category and user!' });

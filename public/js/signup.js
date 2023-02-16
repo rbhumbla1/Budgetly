@@ -25,14 +25,8 @@ const signupForm = async (e) => {
     });
 
     if (response.ok) {
-
-      //
-      //document.location.replace('/api/expenses/spending');
+      //go to expense page when a new user signs up to capture their major expenses.
       document.location.replace('/expenses');
-
-        //NEEDS FIX,
-        // WHEN SUBMIT CLICKED, IT SHOULD GO STRAIGHT TO PROFILE, INSTEAD IT GOES TO LOG IN PAGE
-
     } else {
       alert(response.statusText);
     }
