@@ -10,6 +10,7 @@
 </header>
 <main>
   <div class="parent">
+    {{!-- PIe chart to show budget goals --}}
     <div class="chart">
       <div class="welcome-div" id="title">
         <h1>Monthly Spending</h1>
@@ -27,7 +28,7 @@
         {{!-- Display Budget Goals of the user --}}
 
         <div>
-          {{user.name}}'s Current Budget Goals:
+          <b>{{user.name}}'s Current Budget Goals:</b>
           <div class="row justify-content-center">
             <div class="col-md-6 ">
               <table class="table table-bordered table-responsive">
@@ -61,7 +62,7 @@
 
         {{!-- Add new goals --}}
         <div>
-          Budget Goals Actions
+          <b>Budget Goals Actions</b>
         </div>
         {{!-- Radio button for various actions --}}
         <div class="form-check form-check-inline">
@@ -75,7 +76,7 @@
         {{!-- Form to get goal information --}}
         <form id='form-new-goal' class='new-goal-form'>
           <div id="amt-label">
-            Budget Category
+            <b>Budget Category</b>
           </div>
           <div>
             <select id="category" class="form-select" aria-label="Default select example">
@@ -89,7 +90,7 @@
           </div>
           <div>
             <div id="amt-label">
-              Budget Amount
+              <b>Budget Amount</b>
             </div>
             <div id="amt" class="input-group mb-3">
               <span class="input-group-text">$</span>

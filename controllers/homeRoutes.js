@@ -17,7 +17,7 @@ class Budgetspent {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    //res.redirect('/profile');
+
     res.redirect('/api/budgets/goals')
     return;
   }
@@ -56,13 +56,6 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-router.get('/goals', (req, res) => {
-  res.render('goals');
-});
-
-// router.get('/expenses', (req, res) => {
-//   res.render('expenses');
-// });
 
 // Added a route to get data to display expenses for a user
 router.get('/expenses', withAuth, async (req, res) => {
