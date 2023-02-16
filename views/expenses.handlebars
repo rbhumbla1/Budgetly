@@ -80,7 +80,6 @@
                     <th scope="col">Amount Spent</th>
                     <th scope="col">Note</th>
                     <th scope="col">Date Created</th>
-                    <th scope="col">Amount left</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -90,7 +89,6 @@
                     <td>${{Expense.amount_spent}}</td>
                     <td>{{Expense.note}}</td>
                     <td>{{format_time Expense.date_created}}</td>
-                    <td>{{fundleft}}</td>
                     </tr>
                   {{/each}}
                 </tbody>
