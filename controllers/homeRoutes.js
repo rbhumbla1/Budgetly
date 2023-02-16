@@ -53,7 +53,7 @@ router.get('/goals', (req, res) => {
 //   res.render('expenses');
 // });
 
-// // Added a route to get data to display expenses for a user
+// Added a route to get data to display expenses for a user
 router.get('/expenses', withAuth, async (req, res) => {
   
   try {
@@ -71,23 +71,6 @@ router.get('/expenses', withAuth, async (req, res) => {
     });
     const user = userData.get({ plain: true })
 
-    const budgetData = await Budget.findAll({where: {
-      id: req.session.user_id}, 
-        attributes:['amount']
-      
-    })
-
-    const budget = budgetData.map((items)=>items.get({plain:true}))
-
-    // console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budget[0].amount)
-
-    // console.log('@@@@@@@@@@@@@@@@@@@',parseInt(budget))\
-    
-    const budgetAmount = budget[0].amount
-
-
-    
-
 
     // Get Budget cateories
     const nameData = await BudgetCategory.findAll({
@@ -96,11 +79,6 @@ router.get('/expenses', withAuth, async (req, res) => {
     const names = nameData.map((name) => name.get({ plain: true }));
 
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-    // console.log('@@@@@@@@@@',expenses[0].amount_spent)
-
-    const fundleft = expenses[0].amount_spent - budgetAmount
-
-    console.log("````````````````````",fundleft)
 
     //add category_name to the data send to goals.handlebar for displaying
     expenses.forEach((expense) => {
@@ -110,7 +88,7 @@ router.get('/expenses', withAuth, async (req, res) => {
 
     //call the goals.handlebar to display
     res.render('expenses', {
-      expenses, user, fundleft,
+      expenses, user,
       logged_in: true,
     });
 

@@ -89,8 +89,9 @@
                     <td>{{Expense.category_name}}</td>
                     <td>${{Expense.amount_spent}}</td>
                     <td>{{Expense.note}}</td>
+                    <td>{{Expense.note}}</td>
                     <td>{{format_time Expense.date_created}}</td>
-                    <td>{{fundleft}}</td>
+                    <td><button class="del-btn btn btn-info">Delete</button></td>
                     </tr>
                   {{/each}}
                 </tbody>
