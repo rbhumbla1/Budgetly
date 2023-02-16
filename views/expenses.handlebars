@@ -85,7 +85,7 @@
                   <th scope="col">Amount Spent</th>
                   <th scope="col">Note</th>
                   <th scope="col">Date Created</th>
-                  {{!-- <th scope="col">Amount left</th> --}}
+                  <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,7 +95,7 @@
                   <td>${{Expense.amount_spent}}</td>
                   <td>{{Expense.note}}</td>
                   <td>{{format_time Expense.date_created}}</td>
-                  {{!-- <td><button class="del-btn btn btn-info">Delete</button></td> --}}
+                  <td><button class="del-btn btn btn-info">Delete</button></td>
                 </tr>
                 {{/each}}
               </tbody>
