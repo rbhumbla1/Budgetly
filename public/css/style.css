@@ -72,7 +72,6 @@ h1 {
     
 }
 
-
 pre {
     margin-top: 30px !important;
     border-top: black !important;
@@ -113,6 +112,7 @@ h7 {
     border: 1px, black, solid;
 }
 
+
 .expenseItem{
     opacity: 0.8;
     margin-bottom: 5px;
@@ -130,6 +130,10 @@ h7 {
     margin-left: 10px;
 }
 
+a {
+    color: white !important;
+    text-decoration: none !important;
+}
 
 .noteItem{
     display: flex;
@@ -152,6 +156,10 @@ p{
 #expenseNav{
     font-weight: 700;
     color: rgb(112, 106, 106);
+}
+
+#currentDay{
+    color: rgb(55, 224, 247) !important;
 }
 
 @media (max-width: 1050px) {

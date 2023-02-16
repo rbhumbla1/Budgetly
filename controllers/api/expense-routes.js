@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { Expense, User } = require('../../models');
+const { Expense, User, BudgetCategory } = require('../../models');
+const withAuth = require('../../utils/auth');
+
 
 // Get all expenses
 router.get('/', async (req, res) => {
@@ -16,7 +18,7 @@ router.get('/', async (req, res) => {
 // Get a single expense
 router.get('/:id', async (req, res) => {
   try {
-    const expenseData = await Expense.findByPk(req.params.id, {
+    const expenseData = await Expense.findByPk({where: { id: req.session.user_id},
       include: [{ model: User }],
     });
 
@@ -31,13 +33,71 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Create an expense
-router.post('/', async (req, res) => {
+// Added a route to get data to display expenses for a user
+router.get('/spending', withAuth, async (req, res) => {
+  console.log("**SPENDING");
   try {
-    const expenseData = await Expense.create({
-        expense_id: req.body.expense_id,
+
+    //Get current expenses for the user);
+
+    const expenseData = await Expense.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id', 'amount_spent', 'note', 'date_created']
     });
-    res.status(200).json(expenseData);
+
+    //Get the User Data
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: ['name']
+    });
+    const user = userData.get({ plain: true })
+
+
+    // Get Budget cateories
+    const nameData = await BudgetCategory.findAll({
+      attributes: ['category'],
+    });
+    const names = nameData.map((name) => name.get({ plain: true }));
+
+    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+
+    console.log("**SPENDING", expenses);
+
+    //add category_name to the data send to goals.handlebar for displaying
+    expenses.forEach((expense) => {
+      expense.category_name = names[expense.category_id - 1].category;
+    });
+
+    console.log("**SPENDING", expenses);
+
+    //call the goals.handlebar to display
+    res.render('expenses', {
+      expenses, user,
+      logged_in: true,
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+});
+
+// Create an expense
+router.post('/', withAuth, async (req, res) => {
+  console.log("In post", req.body)
+  try {
+    const newExpense = await Expense.create({
+      amount_spent: req.body.amount,
+      note: req.body.note,
+      category_id: req.body.category,
+      user_id: req.session.user_id
+    });
+
+    if (!newExpense) {
+      res.status(404).json({ message: 'New expense creation failed' });
+      return;
+    }
+
+    res.status(200).json(newExpense);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -67,11 +127,11 @@ router.delete('/:id', async (req, res) => {
   try {
     const expenseData = await Expense.destroy({
       where: {
-        id: req.params.id,
+        category_id: req.params.id,
       },
     });
     if (!expenseData) {
-      res.status(404).json({ message: 'No library card found with that id!' });
+      res.status(404).json({ message: 'No expense found with that id!' });
       return;
     }
     res.status(200).json(expenseData);
@@ -79,5 +139,8 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+
 
 module.exports = router;

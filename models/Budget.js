@@ -12,6 +12,12 @@ Budget.init(
             autoIncrement: true,
         },
         amount: {
+            type: DataTypes.DECIMAL,
+        },
+        fund_remaining: {
+            type: DataTypes.DECIMAL,
+        },
+        fundRemaining: {
             type: DataTypes.FLOAT,
         },
         date_created: {

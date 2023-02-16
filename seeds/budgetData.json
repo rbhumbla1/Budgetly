@@ -1,17 +1,20 @@
 [
   {
     "amount": "100.00",
+    "fund_remaining": "50.00",
     "user_id": "1",
     "category_id": "1"
   },
   {
     "amount": "500.00",
-    "user_id": "1",
+    "fund_remaining": "0.0",
+    "user_id": "3",
     "category_id": "2"
   },
   {
     "amount": "200.00",
-    "user_id": "1",
+    "fund_remaining": "200.00",
+    "user_id": "2",
     "category_id": "5"
   }
 ]
