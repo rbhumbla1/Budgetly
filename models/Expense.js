@@ -3,6 +3,8 @@ const sequelize = require('../config/connection');
 
 class Expense extends Model { }
 
+
+
 Expense.init(
     {
         id: {
@@ -17,16 +19,17 @@ Expense.init(
         note: {
             type: DataTypes.STRING(100),
         },
-        amountSpent: {
-            type: DataTypes.FLOAT,
-        },
-        note: {
-            type: DataTypes.STRING,
-        },
+        // amountSpent: {
+        //     type: DataTypes.FLOAT,
+        // },
+        // note: {
+        //     type: DataTypes.STRING,
+        // },
         date_created: {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW,
+      
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -53,3 +56,4 @@ Expense.init(
 );
 
 module.exports = Expense;
+
