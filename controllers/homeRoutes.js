@@ -48,7 +48,6 @@ router.get('/signup', (req, res) => {
 
 // // Added a route to get data to display expenses for a user
 router.get('/expenses', withAuth, async (req, res) => {
-  console.log('@@@@@@@@@@@@@@@@@@@',req.body)
   try {
 
     //Get current expenses for the user);
@@ -74,10 +73,7 @@ router.get('/expenses', withAuth, async (req, res) => {
     const names = nameData.map((name) => name.get({ plain: true }));
 
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-<<<<<<< HEAD
 
-=======
->>>>>>> d070a1a90fce70fdee1b4fecf2cd5e489a35c72e
 
     //add category_name to the data send to goals.handlebar for displaying
     expenses.forEach((expense) => {
