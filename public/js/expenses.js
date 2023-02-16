@@ -8,7 +8,7 @@ var catEl = '';
 var noteEl = '';
 var priceEl = '';
 
-const addNewExpense = async (category, note, amount, date) => {
+const addNewExpense = async (category, note, amount_spent) => {
 
   console.log("***************IN addNewExp");
 
@@ -17,8 +17,8 @@ const addNewExpense = async (category, note, amount, date) => {
     body: JSON.stringify({
       category,
       note,
-      amount,
-      date,
+      amount_spent,
+      // date,
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -204,19 +204,22 @@ const saveExpenses = async (event) => {
 
     generateExpenses();
     // console.log(thisExpense)
-};
 
-const clearInput = () => {
-  // let input1 = document.getElementById('category');
-  // input1.value = "Select a Category";
-  // let input2 = document.getElementById('note');
-  // input2.value = "";
-  // let input3 = document.getElementById('amount');
-  // input3.display = hide;
+    
+
+
+
+// const clearInput = () => {
+//   // let input1 = document.getElementById('category');
+//   // input1.value = "Select a Category";
+//   // let input2 = document.getElementById('note');
+//   // input2.value = "";
+//   // let input3 = document.getElementById('amount');
+//   // input3.display = hide;
+// };
+
+// // window.onload = function() {
+// //   localStorage.setItem("savedExpenses", $('#inputName').val());
+// //   localStorage.setItem("expenseSums", $('#inputEmail').val());   
+// // }
 }
-
-// window.onload = function() {
-//   localStorage.setItem("savedExpenses", $('#inputName').val());
-//   localStorage.setItem("expenseSums", $('#inputEmail').val());   
-// }
-
