@@ -51,7 +51,33 @@
           <div class="input-group mb-3">
             <input id="note" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
           </div>
-        </div>
+
+        </form>
+         <div>
+          {{user.name}}'s Current Expenses:
+          <div class="row justify-content-center">
+            <div class="col-md-6 ">
+              <table class="table table-bordered table-responsive">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Amount Spent</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Date Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each expenses as |Expense|}}
+                  <tr id="{{Expense.category_id}}">
+                    <td>{{Expense.category_name}}</td>
+                    <td>${{Expense.amount_spent}}</td>
+                    <td>{{Expense.note}}</td>
+                    <td>{{format_time Expense.date_created}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+
 
         <div>
           <div>

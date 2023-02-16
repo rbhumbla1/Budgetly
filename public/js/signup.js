@@ -25,8 +25,18 @@ const signupForm = async (e) => {
     });
 
     if (response.ok) {
+
+
+      // 30-39 conflict merge here (-Adena):
+      //document.location.replace('/api/expenses/spending');
+      document.location.replace('/api/budgets/goals');
+
+        //NEEDS FIX,
+        // WHEN SUBMIT CLICKED, IT SHOULD GO STRAIGHT TO PROFILE, INSTEAD IT GOES TO LOG IN PAGE
+
       //go to expense page when a new user signs up to capture their major expenses.
       document.location.replace('/expenses');
+
     } else {
       alert(response.statusText);
     }

@@ -9,6 +9,7 @@ var noteEl = '';
 var priceEl = '';
 
 
+
 // For adding a new expense given an expense category and amount for the expense
 const addNewExpense = async (category, note, amount_spent) => {
 
@@ -31,6 +32,7 @@ const addNewExpense = async (category, note, amount_spent) => {
     alert('Failed to add expense. Make sure you select a category.');
   }
 };
+
 
 //Event handler
 const newFormHandler = async (e) => {
@@ -57,7 +59,24 @@ const newFormHandler = async (e) => {
      const amount = document.getElementById('amount').value.trim();
      const date = today;
 
-    addNewExpense(category, note, amount, date);
+     const response = await fetch('/api/expenses', {
+      method: 'POST',
+      body: JSON.stringify({
+        category,
+        note,
+        amount,
+        // date,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (response.ok) {
+      document.location.replace('/expenses');
+    } else {
+      alert('Failed to add expense. Make sure you select a category.');
+    }
 };
 
 addNewExp.addEventListener('click', newFormHandler);
