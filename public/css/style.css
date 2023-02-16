@@ -161,13 +161,13 @@ p{
 #currentDay{
     color: rgb(55, 224, 247) !important;
 }
-
+/* 
 @media (max-width: 1050px) {
     .parent {
         margin-top: 75px;
         margin-bottom: 50px;
         display: grid;
         grid-template-columns: auto;
-    }
-    
-}
+    } */
+/*     
+} */
