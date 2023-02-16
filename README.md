@@ -1,134 +1,126 @@
-# Budget-Application
-Budget Application: Project 2
-<!-- Name????? -->
-
-# User Story
-
-This application will allow a user to create a profile describing their income and expenses. The user will be able to set budget goals for themselves and view their progress. 
-
-- Login/Create account (Profile)
-- Profile data:
-    - expenses (goals) (+constant ie.rent)(subscription)
-
-    (connect account or input manually?)
-    income, debt, expenses, bill due dates (with alerts), subscriptions
-
-- progress (monthly)
-    - charts (d3)
-
-- budget goals:
-    - Savings
-    - Transportation
-    - House payments
-    - Personal (entertainment, clothing, misc)
-    - Food
-
-# npm packages
-- Express.js
-- Async
-- YNAB library (new)
-
-
-# Tasks
-- Node.js and Express.js * Deorren
-- Handlebars.js * Karinne & Adena
-- MySQL and the Sequelize ORM for the database * Rima
-- data modeling * Rima
-- GET and POST routes (update/put) * Karinne
-- Authentication (express-session and cookies) * Deorren
-- Application appearance (front-end) * Adena
-- Heroku * Karinne & Deorren
-
-Adena To-Do's
-- Get the Add Goals working
-- D3 Chart
-- Functional & attractive CSS (on different sized screens)
-
-
-# Note-Taker
-Express.js Challenge: Note Taker
+# Budgetly
 
 ## Description
 
-This application can be used to write, save, and delete notes. This application uses an Express.js back end and will save and retrieve note data from a JSON file.
+Budgetly is a budgeting application that allows users easily manage their finances. Budgetly analyzes your income and expenses and helps you understand how much you have available to spend per month. 
 
-This application has a db.json file on the back end that is used to store and retrieve notes using the fs module. Each note has a unique id when it's saved, using the uniqid npm package.
+Users can view past spending patterns by category and make it easy to create future spending goals. Users can create an account, login, input daily expenses, create budget goals, and track their expense comparisons. Users will gain a visual unserstanding of their budgets by category and understand their remaining funds. 
 
-This application has a delete request functionality. All the notes are read from the db.json file, the note with the given id property is removed, and the notes are rewritten to the db.json file.
+With Budgetly, user have an easy way to track their finances and optimize their budget.
 
-### User Story
+## User Story
 
-```
-AS A small business owner
-I WANT to be able to write and save notes
-SO THAT I can organize my thoughts and keep track of tasks I need to complete
-```
+AS A user
+I WANT to see track my budget goals
+SO THAT I can manage my finances.
 
-### Acceptance Criteria
+## Acceptance Criteria
 
-```
-GIVEN a note-taking application
-WHEN I open the Note Taker
-THEN I am presented with a landing page with a link to a notes page
-WHEN I click on the link to the notes page
-THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column
-WHEN I enter a new note title and the note’s text
-THEN a Save icon appears in the navigation at the top of the page
-WHEN I click on the Save icon
-THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes
-WHEN I click on an existing note in the list in the left-hand column
-THEN that note appears in the right-hand column
-WHEN I click on the Write icon in the navigation at the top of the page
-THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
-```
+GIVEN a budget dashboard with form inputs
+WHEN I click on add a budget, and input the category and amount 
+THEN I am presented with a new budget goal alongside its budget, amount, and fund remaining.
+WHEN I click on update a budget, and input the category and amount 
+THEN I am presented with an updated budget goal alongside its budget, amount, and fund remaining.
+WHEN I click on the 'expenses' option in the navigation bar
+THEN I am presented with a new page that display up to 50 of my most recent expenses
+WHEN I input a category, description, and amount
+THEN I am presented with a new expense described by its category, description, and amount, and the fund remaining in the budget dashboard updates.
+WHEN I click on the 'logout' option in the navigation bar
+THEN I am logged out of Budgetly 
 
 ## Table of Contents
 
+- [Installation](#installation)
 - [Usage](#usage)
-- [Routes](#routes)
 - [License](#license)
-- [Features](#Features)
+- [Features](#features)
+- [Tests](#tests)
+
+## Installation
+
+No Install Needed. To access the website, use the link below.
+
+<!-- need to add -->
+[Live website](https://.herokuapp.com/)
+
 
 ## Usage
 
 1. Open the website using the following link:
 
-    [Live website](https://note-taker23.herokuapp.com/)
+    <!-- need to add -->
+    [Live website](https://.herokuapp.com/)
 
-2. Click the 'Get Started' button.
+2. Click the 'Login' button if you do not already have an account.
 
-3. Enter your note's title and text into the right-hand portion of the screen.
+3. Enter your budget goals with the following information: category and amount.
 
-4. Click the Save icon in the top right of the screen.
+4. Click the '+' button to set the current budget goal.
 
-The following images show the web application's appearance and functionality:
+5. In the 'expenses' page (accessible through the navigation bar), add your expenses using the folling information: category, description, and amount.
 
-![Application appearance](./assets/images/appearance.jpg)
+6. Click the 'Add Expense' button to set the current expense.
 
-![Application functionality](./assets/images/appearance2.jpg)
+7. Return to the budget 'dashboard' (accessible through the navigation bar), and view your fund remaining by category.
 
-## Routes 
+<!-- Here is a [Link](https://drive.google.com/file/d/1J98GbnfviYuA_mH7z8nOgGvGrsD6c4Bs/view?usp=sharing) to a walkthrough video that demonstrates the functionality of the application. -->
 
-The following HTML routes are included:
-* GET /notes returns the notes.html file.
-* GET * returns the index.html file.
+Example of the application's appearance and functionality:
 
-The following API routes are created:
-* GET /api/notes reads the db.json file and returns all saved notes as JSON.
-* POST /api/notes receives a new note to save on the request body, adds it to the db.json file, and returns the new note to the client
+![login](./assets/login.jpg)
+![dashboard](./assets/dashboard.jpg)
+![expenses](./assets/expenses.jpg)
 
 ## License
 
-This project is licensed under the MIT license. For more information on the MIT license, please use the following link: https://opensource.org/licenses/MIT.
+MIT License
+
+Copyright (c) [2022]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ## Features
 
 1. JavaScript
-2. Express.js
-3. Node.js
-4. npm
-5. Bootstrap
-6. Inquirer
-7. JSON
-8. Heroku
-9. Insomnia
+2. Bootstrap
+3. D3
+4. Node.js
+5. Express.js
+6. Asyn
+7. YNAB library (new)
+8. JQuery
+9. RESTful API
+10. MYSQL
+11. Sequelize ORM 
+12. Handlebars.js
+13. Express-session  
+14. Cookies
+15. Environment
+16. Heroku
+
+## Tests
+
+Insomnia testing:
+
+![Insmnia Test 1](./assets/InsomniaTest.jpg)
+![Insmnia Test 2](./assets/InsomniaTest2.jpg)
+![Insmnia Test 3](./assets/InsomniaTest3.jpg)
+![Insmnia Test 4](./assets/InsomniaTest4.jpg)
+![Insmnia Test 5](./assets/InsomniaTest5.jpg)
+
