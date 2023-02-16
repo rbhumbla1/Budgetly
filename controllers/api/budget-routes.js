@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Budget, User, BudgetCategory } = require('../../models');
+const { Budget, User, BudgetCategory, Expense } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Get all budgets for a user
@@ -53,13 +53,22 @@ router.get('/goals', withAuth, async (req, res) => {
     const nameData = await BudgetCategory.findAll({
       attributes: ['category'],
     });
+
+    const expenseData = await Expense.findAll({
+      attributes: ['amount_spent'],
+    });
+
     const names = nameData.map((name) => name.get({ plain: true }));
 
     const budgets = budgetData.map((budget) => budget.get({ plain: true }));
 
+    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+
+
     //add category_name to the data send to goals.handlebar for displaying
     budgets.forEach((budget) => {
       budget.category_name = names[budget.category_id - 1].category;
+      budgets.fund_remaining = budgets[0].amount - expenses[0].amount_spent;
     });
 //
     // const budget = budgetData.map((items)=>items.get({plain:true}))
@@ -68,13 +77,19 @@ router.get('/goals', withAuth, async (req, res) => {
     // // console.log('@@@@@@@@@@@@@@@@@@@',parseInt(budget))\
     
     // const budgetAmount = budgets[0].amount
-    console.log("------------------------",budgets[0].amount)
+    // console.log("------------------------",expenses)
 
     // const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-    // // console.log('@@@@@@@@@@',expenses[0].amount_spent)
 
-    // const fundleft = expenses[0].amount_spent - budgetAmount
-    // console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",fundleft)
+    // console.log('@@@@@@@@@@',expenses[0].amount_spent)
+
+
+    // budgets.fund_remaining = Number(expenses[0].amount_spent);
+    // budgets[0].amount - expenses[0].amount_spent
+    console.log("00000000000000000",expenses[0].amount_spent)
+    console.log("----------------",budgets[0].amount)
+
+    console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgets.fund_remaining)
 
 //
 

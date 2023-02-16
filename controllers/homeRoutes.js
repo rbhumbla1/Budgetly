@@ -98,9 +98,9 @@ router.get('/expenses', withAuth, async (req, res) => {
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
     // console.log('@@@@@@@@@@',expenses[0].amount_spent)
 
-    const fundleft = expenses[0].amount_spent - budgetAmount
+    // const fundleft = expenses[0].amount_spent - budgetAmount
 
-    console.log("````````````````````",fundleft)
+    // console.log("````````````````````",fundleft)
 
     //add category_name to the data send to goals.handlebar for displaying
     expenses.forEach((expense) => {
