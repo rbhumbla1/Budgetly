@@ -117,97 +117,94 @@ goals.addEventListener("click",  async ()=> {
 //     }
 // };
 
-let foodSum = 0;
-let houseSum = 0;
-let personalSum = 0;
-let savingsSum = 0;
-let transportationSum = 0;
+// let foodSum = 0;
+// let houseSum = 0;
+// let personalSum = 0;
+// let savingsSum = 0;
+// let transportationSum = 0;
 
 
-//  Save expense input to localStorage
-const saveExpenses = async (event) => {
-    event.preventDefault();
+// // //  Save expense input to localStorage
+// // const saveExpenses = async (event) => {
+// //     event.preventDefault();
   
-    //Display today's date
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
-    var yyyy = today.getFullYear();
-    today = mm + '/' + dd + '/' + yyyy;
-    // console.log(today);
+// //     //Display today's date
+// //     var today = new Date();
+// //     var dd = String(today.getDate()).padStart(2, '0');
+// //     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+// //     var yyyy = today.getFullYear();
+// //     today = mm + '/' + dd + '/' + yyyy;
+// //     // console.log(today);
 
-    const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
-    const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
+//     const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
+//     const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
 
-    if(savedExpenses.length == 50){
-        savedExpenses.shift();
-    }
+// //     if(savedExpenses.length == 50){
+// //         savedExpenses.shift();
+// //     }
 
-    const category = document.getElementById('category').value.trim();
-    const note = document.getElementById('note').value.trim();
-    const amount = document.getElementById('amount').value.trim();
-    const date = today;
-    // console.log(date)
+//     const category = document.getElementById('category').value.trim();
+//     const note = document.getElementById('note').value.trim();
+//     const amount = document.getElementById('amount').value.trim();
+//     const date = today;
+//     // console.log(date)
 
-    let price = parseInt(amount);
+//     let price = parseInt(amount);
 
-    if (category == 1){
-        console.log('Food')
-        categoryChoice = 'Food'
-        foodSum += price
-        console.log(foodSum)
-      }else if (category == 2) {
-        console.log('House Loan')
-        categoryChoice = 'House Loan'
-        houseSum += price
-        console.log(houseSum)
-      }else if (category == 3) {
-        console.log('Personal')
-        categoryChoice = 'Personal'
-        personalSum += price
-        console.log(personalSum)
-      }else if (category == 4) {
-        console.log('Savings')
-        categoryChoice = 'Savings'
-        savingsSum += price
-        console.log(categoryChoice)
-      }else if (category == 5) {
-        console.log('Transportation')
-        categoryChoice = 'Transportation'
-        transportationSum += price
-        console.log(transportationSum)
-      }else {
-        console.log("No category chosen")
-        categoryChoice = 'No category chosen'
-      }
+//     if (category == 1){
+//         console.log('Food')
+//         categoryChoice = 'Food'
+//         foodSum += price
+//         console.log(foodSum)
+//       }else if (category == 2) {
+//         console.log('House Loan')
+//         categoryChoice = 'House Loan'
+//         houseSum += price
+//         console.log(houseSum)
+//       }else if (category == 3) {
+//         console.log('Personal')
+//         categoryChoice = 'Personal'
+//         personalSum += price
+//         console.log(personalSum)
+//       }else if (category == 4) {
+//         console.log('Savings')
+//         categoryChoice = 'Savings'
+//         savingsSum += price
+//         console.log(categoryChoice)
+//       }else if (category == 5) {
+//         console.log('Transportation')
+//         categoryChoice = 'Transportation'
+//         transportationSum += price
+//         console.log(transportationSum)
+//       }else {
+//         console.log("No category chosen")
+//         categoryChoice = 'No category chosen'
+//       }
 
-    const thisExpense = {
-        category : categoryChoice,
-        note: note,
-        amount: amount,
-        date: date,
-    };
+//     const thisExpense = {
+//         category : categoryChoice,
+//         note: note,
+//         amount: amount,
+//         date: date,
+//     };
 
-    const sumOfCategories = {
-      food: foodSum,
-      house: houseSum,
-      personal: personalSum,
-      savings: savingsSum,
-      transportation: transportationSum,
-    }
-    console.log(sumOfCategories)
+//     const sumOfCategories = {
+//       food: foodSum,
+//       house: houseSum,
+//       personal: personalSum,
+//       savings: savingsSum,
+//       transportation: transportationSum,
+//     }
+//     console.log(sumOfCategories)
 
-    savedExpenses.push(thisExpense);
+//     savedExpenses.push(thisExpense);
 
-    localStorage.setItem("savedExpenses", JSON.stringify(savedExpenses));
-    localStorage.setItem("expenseSums", JSON.stringify(sumOfCategories));
+//     localStorage.setItem("savedExpenses", JSON.stringify(savedExpenses));
+//     localStorage.setItem("expenseSums", JSON.stringify(sumOfCategories));
 
-    generateExpenses();
-    // console.log(thisExpense)
-
-    
-
-
+//     generateExpenses();
+//     // console.log(thisExpense)
+// };
 
 // const clearInput = () => {
 //   // let input1 = document.getElementById('category');
@@ -216,10 +213,10 @@ const saveExpenses = async (event) => {
 //   // input2.value = "";
 //   // let input3 = document.getElementById('amount');
 //   // input3.display = hide;
-// };
+// }
 
 // // window.onload = function() {
-// //   localStorage.setItem("savedExpenses", $('#inputName').val());
-// //   localStorage.setItem("expenseSums", $('#inputEmail').val());   
-// // }
-}
+//   localStorage.setItem("savedExpenses", $('#inputName').val());
+//   localStorage.setItem("expenseSums", $('#inputEmail').val());   
+// }
+

@@ -4,12 +4,19 @@ const withAuth = require('../../utils/auth');
 
 
 // Get all expenses
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
-      const expenseData = await Expense.findAll({
-        include: [{ model: User }],
-      });
-      res.status(200).json(expenseData);
+      const expenseData = await Expense.findAll({where: {
+        id:req.session.user_id
+      }});
+
+      const budgets = await Budget.findAll({where: {
+        id:req.session.user_id
+      }})
+      
+
+      
+      res.render('expenses', expenseData)
     } catch (err) {
       res.status(500).json(err);
     }
@@ -50,6 +57,11 @@ router.get('/spending', withAuth, async (req, res) => {
       attributes: ['name']
     });
     const user = userData.get({ plain: true })
+    const budgetData = Budget.findAll({where: {
+      id: req.session.user_id
+    }})
+
+    console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgetData)
 
 
     // Get Budget cateories

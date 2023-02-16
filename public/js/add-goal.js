@@ -136,18 +136,11 @@ for (let i = 0; i < delBtn.length; i++) {
 const expense = document.getElementById("expense-button")
 
 expense.addEventListener("click", async () => {
-  const response = await fetch("/api/expenses", {
-    method: 'GET',
-    header: {
-      'Content-Type': 'application/json'
-    }
-  })
-  if (response.ok) {
-    //document.location.replace('/api/expenses/spending');
+  
+ 
+    // document.location.replace('/api/expenses/spending');
     document.location.replace('/expenses');
-  } else {
-    alert(response.statusText);
-  }
+ 
 })
 
 

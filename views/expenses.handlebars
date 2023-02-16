@@ -28,8 +28,12 @@
       <div class="welcome-div" id="title">
         <h1>Daily Expenses</h1>
         <h5>Today's date:<a id="currentDay"></a></h5>
+          <h1>{{expense}}</h1>
       </div>
       <div>
+        
+        
+       
         <form class='new-goal-form'>
 
           <select id="category" class="form-select" aria-label="Default select example">
@@ -76,6 +80,7 @@
                     <th scope="col">Amount Spent</th>
                     <th scope="col">Note</th>
                     <th scope="col">Date Created</th>
+                    <th scope="col">Amount left</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -83,6 +88,7 @@
                   <tr id="{{Expense.category_id}}">
                     <td>{{Expense.category_name}}</td>
                     <td>${{Expense.amount_spent}}</td>
+                    <td>{{Expense.note}}</td>
                     <td>{{Expense.note}}</td>
                     <td>{{format_time Expense.date_created}}</td>
                     <td><button class="del-btn btn btn-info">Delete</button></td>
