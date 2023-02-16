@@ -64,7 +64,7 @@ router.get('/goals', (req, res) => {
 //   res.render('expenses');
 // });
 
-// // Added a route to get data to display expenses for a user
+// Added a route to get data to display expenses for a user
 router.get('/expenses', withAuth, async (req, res) => {
   
   try {

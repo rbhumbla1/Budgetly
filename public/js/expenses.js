@@ -8,7 +8,7 @@ var catEl = '';
 var noteEl = '';
 var priceEl = '';
 
-const addNewExpense = async (category, note, amount, date) => {
+const addNewExpense = async (category, note, amount_spent) => {
 
   console.log("***************IN addNewExp");
 
@@ -17,8 +17,8 @@ const addNewExpense = async (category, note, amount, date) => {
     body: JSON.stringify({
       category,
       note,
-      amount,
-      date,
+      amount_spent,
+      // date,
     }),
     headers: {
       'Content-Type': 'application/json',

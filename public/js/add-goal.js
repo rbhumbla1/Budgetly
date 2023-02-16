@@ -5,8 +5,8 @@ const deleteGoal = document.getElementById('inlineCheckbox3');
 const amtLabel = document.getElementById("amt-label");
 const amtDiv = document.getElementById("amt");
 
-const clickButton = document.getElementById('clickButton');
 
+const clickButton = document.getElementById('clickButton');
 const addNewGoal = async (category, amount, fund_remaining) => {
   const response = await fetch(`/api/budgets`, {
     method: 'POST',
@@ -19,6 +19,8 @@ const addNewGoal = async (category, amount, fund_remaining) => {
       'Content-Type': 'application/json',
     },
   });
+
+
 
   if (response.ok) {
     console.log("BACK**********", response);
@@ -74,15 +76,6 @@ const newFormHandler = async (e) => {
   const category = document.getElementById('category').value.trim();
   const amount = document.getElementById('amount').value.trim();
 
-  // const expenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
-  // const BudgetAmount = document.getElementById('amount').value.trim();
-
-  // console.log(expenses);
-  // console.log(expenses[0].amount)
-  // console.log(BudgetAmount)
-
-  // const fundRemaining = BudgetAmount - expenses[0].amount
-  // console.log(fundRemaining)
 
   if (addGoal.checked) {
     addNewGoal(category, amount, amount);
@@ -115,6 +108,9 @@ clickButton.addEventListener('click', newFormHandler);
 
 
 const delBtn = document.querySelectorAll('.del-btn')
+
+
+
 
 for (let i = 0; i < delBtn.length; i++) {
   delBtn[i].addEventListener("click", async (e) => {
