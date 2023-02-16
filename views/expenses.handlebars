@@ -19,9 +19,8 @@
         <nav class="navbar navbar-light" id="navbar">
           <h2 id="budgetly">Budgetly</h2>
           <form class="form-inline">
-            <button class="btn btn-sm btn-outline-secondary" type="button">Home</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Dashboard</button>
-            <button class="btn btn-sm btn-outline-secondary" type="button">Account</button>
+            <button class="btn btn-sm btn-outline-secondary" id="goals-button" type="button">Dashboard</button>
+            <button class="btn btn-sm btn-outline-secondary button" id="logout-button" type="button"><a href="http://localhost:3001">Logout</a></button>
           </form>
         </nav>
      </header>
@@ -67,26 +66,52 @@
           
           <div class="goal-button">
             <button type="button" value="submit" class="btn btn-outline-info" id="saveButton">Add Expense</button>
-            <button type="button" value="submit" class="btn btn-outline-info" id="deleteButton">Delete Expense</button>
+            {{!-- <button type="button" value="submit" class="btn btn-outline-info" id="deleteButton">Delete Expense</button> --}}
           </div>
-          <section id="expenseList">
-              <h7>Up to 50 of your most recent expenses:</h7>
-
-              <ul class="expenseList" id="expenseNav">
-                <li>Date</li>
-                <li id="catNav">Category</li>
-                <li>Amount</li>
-              </ul>
-
-              <div id="savedExpenses" class="searched-cities">
-                    <div id="savedExpenses" class="list-unstyled d-flex row"></div>
-              </div>
-            </section>
         </form>
+         <div>
+          {{user.name}}'s Current Expenses:
+          <div class="row justify-content-center">
+            <div class="col-md-6 ">
+              <table class="table table-bordered table-responsive">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Amount Spent</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Date Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each expenses as |Expense|}}
+                  <tr id="{{Expense.category_id}}">
+                    <td>{{Expense.category_name}}</td>
+                    <td>${{Expense.amount_spent}}</td>
+                    <td>${{Expense.note}}</td>
+                    <td>{{format_time Expense.date_created}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+
         <nav class="bottom-nav">
   <div>Budgetly</div>
 </nav>
     </main>
+    <script>
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+          var yyyy = today.getFullYear();
+          today = mm + '/' + dd + '/' + yyyy;
+          const currentDay = document.getElementById('currentDay')
+          currentDay.textContent += today;
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
       integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -104,6 +129,6 @@
       crossorigin="anonymous">
     </script> --}}
     <script src="/js/expenses.js"></script>
-    {{!-- <script src='/js/logout.js'></script>   --}}
+    <script src='/js/logout.js'></script> 
   </body>
 </html>
