@@ -5,6 +5,7 @@ const deleteGoal = document.getElementById('inlineCheckbox3');
 const amtLabel = document.getElementById("amt-label");
 const amtDiv = document.getElementById("amt");
 
+
 const addNewGoal = async (category, amount) => {
   const response = await fetch(`/api/budgets`, {
     method: 'POST',
@@ -16,6 +17,8 @@ const addNewGoal = async (category, amount) => {
       'Content-Type': 'application/json',
     },
   });
+
+
 
   if (response.ok) {
     document.location.replace('/api/budgets/goals');
@@ -84,6 +87,7 @@ const newFormHandler = async (e) => {
   const category = document.getElementById('category').value.trim();
   const amount = document.getElementById('amount').value.trim();
 
+
   if (addGoal.checked) {
     displayAmount(true);
     addNewGoal(category, amount);
@@ -96,13 +100,15 @@ const newFormHandler = async (e) => {
   } else {
     displayAmount(true);
     alert("Please select one of the actions before clicking the Submit button.");
-  }
+  } 
 }
 
 formNewGoal.addEventListener('submit', newFormHandler);
 
 
 const delBtn = document.querySelectorAll('.del-btn')
+
+
 
 for(let i = 0; i < delBtn.length; i++) {
   delBtn[i].addEventListener("click", async (e)=>{
@@ -112,17 +118,17 @@ for(let i = 0; i < delBtn.length; i++) {
     const response = await fetch(`/api/budgets/${currentCategory}`, {
       method: 'DELETE',
     });
-  
+    
     if (response.ok) {
       document.location.replace('/api/budgets/goals');
     } else {
       alert('Failed to delete the goal.');
     }
+
+
     
   
   })
 
 }
-
-
 

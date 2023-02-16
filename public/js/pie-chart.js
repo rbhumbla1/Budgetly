@@ -2,16 +2,16 @@
 const getData = async () => {
     const response = await fetch('/api/budgets', {
         method: 'GET',
-    });
+    });0
 
     if (response.ok) {
         let data = await response.json();
+
         
         var svg = d3.select("svg"),
             width = svg.attr("width"),
             height = svg.attr("height"),
             radius = 200;
-
 
         var g = svg.append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
@@ -23,6 +23,7 @@ const getData = async () => {
         var pie = d3.pie().value(function (d) {
             return d.amount;
         });
+
 
         var arc = g.selectAll("arc")
             .data(pie(data))
@@ -61,12 +62,9 @@ const getData = async () => {
             .style("font-size", 15) 
         
         
-
-
     } else {
-        console.log("get failed");
+        console.log("get failed")
     }
-
 
 }
 
