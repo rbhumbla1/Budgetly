@@ -2,17 +2,17 @@
 
 ## Description
 
-Budgetly is a budgeting application that allows users easily manage their finances. Budgetly analyzes your income and expenses and helps you understand how much you have available to spend per month. 
+Budgetly is a budgeting application that allows users to easily manage their finances. Budgetly analyzes your income and expenses and helps you understand how much you have available to spend per month. 
 
-Users can view past spending patterns by category and make it easy to create future spending goals. Users can create an account, login, input daily expenses, create budget goals, and track their expense comparisons. Users will gain a visual unserstanding of their budgets by category and understand their remaining funds. 
+Users can view past spending patterns by category and make it easy to create future spending goals. Users can create an account, login, input daily expenses, create budget goals, and track their expense comparisons. Users will gain a visual understanding of their budgets by category and understand their remaining funds. 
 
-With Budgetly, user have an easy way to track their finances and optimize their budget.
+With Budgetly, users have an easy way to track their finances and optimize their budget.
 
 ## User Story
 
-AS A user
-I WANT to see track my budget goals
-SO THAT I can manage my finances.
+As a user,
+I WANT to track my expenses all in one place 
+SO THAT I can keep my spending within my budget.
 
 ## Acceptance Criteria
 
