@@ -17,9 +17,9 @@ Budget.init(
         fund_remaining: {
             type: DataTypes.DECIMAL,
         },
-        fundRemaining: {
-            type: DataTypes.FLOAT,
-        },
+        // fundRemaining: {
+        //     type: DataTypes.FLOAT,
+        // },
         date_created: {
             type: DataTypes.DATE,
             allowNull: false,
