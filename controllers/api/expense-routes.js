@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Expense, User, BudgetCategory } = require('../../models');
+const { Expense, User, BudgetCategory,Budget } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -95,7 +95,7 @@ router.get('/spending', withAuth, async (req, res) => {
 
 // Create an expense
 router.post('/', withAuth, async (req, res) => {
-  console.log("In post", req.body)
+  console.log('@@@@@@@@@@@@@@@@@@@',req.body)
   try {
     const newExpense = await Expense.create({
       amount_spent: req.body.amount,
