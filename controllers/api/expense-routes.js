@@ -42,7 +42,7 @@ router.get('/:id', async (req, res) => {
 
 // Added a route to get data to display expenses for a user
 router.get('/spending', withAuth, async (req, res) => {
-  console.log("**SPENDING");
+ 
   try {
 
     //Get current expenses for the user);
@@ -61,9 +61,6 @@ router.get('/spending', withAuth, async (req, res) => {
       id: req.session.user_id
     }})
 
-    console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgetData)
-
-
     // Get Budget cateories
     const nameData = await BudgetCategory.findAll({
       attributes: ['category'],
@@ -72,15 +69,13 @@ router.get('/spending', withAuth, async (req, res) => {
 
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
 
-    console.log("**SPENDING", expenses);
 
     //add category_name to the data send to goals.handlebar for displaying
     expenses.forEach((expense) => {
       expense.category_name = names[expense.category_id - 1].category;
     });
 
-    console.log("**SPENDING", expenses);
-
+  
     //call the goals.handlebar to display
     res.render('expenses', {
       expenses, user,

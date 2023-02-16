@@ -38,10 +38,10 @@ THEN I am logged out of Budgetly
 
 ## Installation
 
-No Install Needed. To access the website, use the link below.
+No install Needed. To access the website, use the link below.
 
 <!-- need to add -->
-[Live website](https://.herokuapp.com/)
+[Live website](https://budget-app-nodejs.herokuapp.com/)
 
 
 ## Usage
@@ -49,9 +49,9 @@ No Install Needed. To access the website, use the link below.
 1. Open the website using the following link:
 
     <!-- need to add -->
-    [Live website](https://.herokuapp.com/)
+    [Live website](https://budget-app-nodejs.herokuapp.com/)
 
-2. Click the 'Login' button if you do not already have an account.
+2. Click the 'Create an account' button if you do not already have an account.
 
 3. Enter your budget goals with the following information: category and amount.
 
