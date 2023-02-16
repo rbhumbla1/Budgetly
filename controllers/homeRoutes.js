@@ -54,48 +54,70 @@ router.get('/goals', (req, res) => {
 // });
 
 // // Added a route to get data to display expenses for a user
-// router.get('/expenses', withAuth, async (req, res) => {
+router.get('/expenses', withAuth, async (req, res) => {
   
-//   try {
+  try {
 
-//     //Get current expenses for the user);
+    //Get current expenses for the user);
 
-//     const expenseData = await Expense.findAll({
-//       where: { user_id: req.session.user_id },
-//       attributes: ['category_id', 'amount_spent', 'note', 'date_created']
-//     });
+    const expenseData = await Expense.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id', 'amount_spent', 'note', 'date_created']
+    });
 
-//     //Get the User Data
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: ['name']
-//     });
-//     const user = userData.get({ plain: true })
+    //Get the User Data
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: ['name']
+    });
+    const user = userData.get({ plain: true })
+
+    const budgetData = await Budget.findAll({where: {
+      id: req.session.user_id}, 
+        attributes:['amount']
+      
+    })
+
+    const budget = budgetData.map((items)=>items.get({plain:true}))
+
+    // console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budget[0].amount)
+
+    // console.log('@@@@@@@@@@@@@@@@@@@',parseInt(budget))\
+    
+    const budgetAmount = budget[0].amount
 
 
-//     // Get Budget cateories
-//     const nameData = await BudgetCategory.findAll({
-//       attributes: ['category'],
-//     });
-//     const names = nameData.map((name) => name.get({ plain: true }));
-
-//     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-
-//     //add category_name to the data send to goals.handlebar for displaying
-//     expenses.forEach((expense) => {
-//       expense.category_name = names[expense.category_id - 1].category;
-//     });
+    
 
 
-//     //call the goals.handlebar to display
-//     res.render('expenses', {
-//       expenses, user,
-//       logged_in: true,
-//     });
+    // Get Budget cateories
+    const nameData = await BudgetCategory.findAll({
+      attributes: ['category'],
+    });
+    const names = nameData.map((name) => name.get({ plain: true }));
 
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
+    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+    // console.log('@@@@@@@@@@',expenses[0].amount_spent)
 
-// });
+    const fundleft = expenses[0].amount_spent - budgetAmount
+
+    console.log("````````````````````",fundleft)
+
+    //add category_name to the data send to goals.handlebar for displaying
+    expenses.forEach((expense) => {
+      expense.category_name = names[expense.category_id - 1].category;
+    });
+
+
+    //call the goals.handlebar to display
+    res.render('expenses', {
+      expenses, user, fundleft,
+      logged_in: true,
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+});
 
 module.exports = router;

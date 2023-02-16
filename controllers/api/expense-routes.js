@@ -57,6 +57,11 @@ router.get('/spending', withAuth, async (req, res) => {
       attributes: ['name']
     });
     const user = userData.get({ plain: true })
+    const budgetData = Budget.findAll({where: {
+      id: req.session.user_id
+    }})
+
+    console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgetData)
 
 
     // Get Budget cateories
