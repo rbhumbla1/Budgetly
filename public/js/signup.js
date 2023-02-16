@@ -28,7 +28,7 @@ const signupForm = async (e) => {
 
       //
       //document.location.replace('/api/expenses/spending');
-      document.location.replace('/expenses');
+      document.location.replace('/api/budgets/goals');
 
         //NEEDS FIX,
         // WHEN SUBMIT CLICKED, IT SHOULD GO STRAIGHT TO PROFILE, INSTEAD IT GOES TO LOG IN PAGE

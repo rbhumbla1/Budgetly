@@ -8,29 +8,6 @@ var catEl = '';
 var noteEl = '';
 var priceEl = '';
 
-const addNewExpense = async (category, note, amount_spent) => {
-
-  console.log("***************IN addNewExp");
-
-  const response = await fetch(`/api/expenses`, {
-    method: 'POST',
-    body: JSON.stringify({
-      category,
-      note,
-      amount_spent,
-      // date,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (response.ok) {
-    document.location.replace('/expenses');
-  } else {
-    alert('Failed to add expense. Make sure you select a category.');
-  }
-};
 
 const newFormHandler = async (e) => {
   e.preventDefault();
@@ -56,7 +33,24 @@ const newFormHandler = async (e) => {
      const amount = document.getElementById('amount').value.trim();
      const date = today;
 
-    addNewExpense(category, note, amount, date);
+     const response = await fetch('/api/expenses', {
+      method: 'POST',
+      body: JSON.stringify({
+        category,
+        note,
+        amount,
+        // date,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (response.ok) {
+      document.location.replace('/expenses');
+    } else {
+      alert('Failed to add expense. Make sure you select a category.');
+    }
 };
 
 
