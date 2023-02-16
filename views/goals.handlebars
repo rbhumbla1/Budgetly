@@ -13,7 +13,9 @@
     <div class="chart">
       <div class="welcome-div" id="title">
         <h1>Monthly Spending</h1>
-      </div>
+        <div id="no-goals-yet"></div>
+        </div>
+        
       <svg id="pie-chart" width="500" height="400"></svg>
     </div>
 
@@ -46,7 +48,7 @@
                     <td>${{Budget.fund_remaining}}</td>
                     {{!-- <td>${{fund_left}}</td> --}}
                     <td>{{format_time Budget.date_created}}</td>
-                    <td><button data-id="{{Budget.category_id}}" class="del-btn">Delete</button></td>
+                    <td><button data-id="{{Budget.category_id}}" class="del-btn btn btn-info">Delete</button></td>
                   </tr>
                   {{/each}}
                 </tbody>
