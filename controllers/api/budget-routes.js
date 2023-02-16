@@ -70,28 +70,6 @@ router.get('/goals', withAuth, async (req, res) => {
       budget.category_name = names[budget.category_id - 1].category;
       budgets.fund_remaining = budgets[0].amount - expenses[0].amount_spent;
     });
-//
-    // const budget = budgetData.map((items)=>items.get({plain:true}))
-
-
-    // // console.log('@@@@@@@@@@@@@@@@@@@',parseInt(budget))\
-    
-    // const budgetAmount = budgets[0].amount
-    // console.log("------------------------",expenses)
-
-    // const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-
-    // console.log('@@@@@@@@@@',expenses[0].amount_spent)
-
-
-    // budgets.fund_remaining = Number(expenses[0].amount_spent);
-    // budgets[0].amount - expenses[0].amount_spent
-    // console.log("00000000000000000",expenses[0].amount_spent)
-    // console.log("----------------",budgets[0].amount)
-
-    // console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgets.fund_remaining)
-
-//
 
     //call the goals.handlebar to display
     res.render('goals', {
@@ -192,14 +170,15 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // Delete a budget
-// Delete a budget
 router.delete('/:id', withAuth, async (req, res) => {
   console.log(req.params.id)
   try {
-   
-    const budgetData = await Budget.destroy({where: {
-      category_id: req.params.id,
-    }});
+
+    const budgetData = await Budget.destroy({
+      where: {
+        category_id: req.params.id,
+      }
+    });
 
     if (!budgetData) {
       res.status(404).json({ message: 'No budget with this category and user!' });
