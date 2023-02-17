@@ -2,6 +2,11 @@ const formLogin = document.getElementById('form-login');
 const createBtn = document.querySelector('.create-account');
 const incorrect = document.getElementById('incorrect');
 
+function randomImg() {
+  document.getElementById('random-image').innerHTML = '<img src="https://source.unsplash.com/random/?city">';
+
+}
+
 
 const loginHandler = async (e) => {
   e.preventDefault();
@@ -30,6 +35,7 @@ const loginHandler = async (e) => {
 
 
 formLogin.addEventListener('submit', loginHandler);
+randomImg();
 
 
 
