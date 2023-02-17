@@ -1,13 +1,16 @@
+//We used the d3 api to create a pie chart to show the distribution of budget goals
+//Reference: We used the example code given here as our starter code: 
+//https://www.educative.io/answers/how-to-create-a-pie-chart-using-d3
 
 const getData = async () => {
     const response = await fetch('/api/budgets', {
         method: 'GET',
-    });0
+    });
 
     if (response.ok) {
         let data = await response.json();
 
-        
+        //create a pie chart
         var svg = d3.select("svg"),
             width = svg.attr("width"),
             height = svg.attr("height"),
@@ -24,7 +27,7 @@ const getData = async () => {
             return d.amount;
         });
 
-
+        //use data from fetch call as data source
         var arc = g.selectAll("arc")
             .data(pie(data))
             .enter();
@@ -33,6 +36,7 @@ const getData = async () => {
             .outerRadius(radius)
             .innerRadius(0);
 
+        //the pie slices are based on budget category
         arc.append("path")
             .attr("d", path)
             .attr("fill", function (d) { return ordScale(d.data.category_name); });
@@ -41,6 +45,7 @@ const getData = async () => {
             .outerRadius(radius)
             .innerRadius(0);
 
+        //add budget category name to the display for a slice
         arc.append("text")
             .attr("transform", function (d) {
                 return "translate(" + label.centroid(d) + ")";
@@ -51,17 +56,18 @@ const getData = async () => {
             .style("font-family", "arial")
             .style("font-size", 15)
 
+        //Also add the budget goal amount in display of the slice
         arc.append("text")
             .attr("transform", function (d) {
                 return "translate(" + label.centroid(d) + ")";
             })
             .attr("dy", "1em")
-            .text(function (d) { return ' $' + d.data.amount})
+            .text(function (d) { return ' $' + d.data.amount })
             .style("text-anchor", "middle")
             .style("font-family", "arial")
-            .style("font-size", 15) 
-        
-        
+            .style("font-size", 15)
+
+
     } else {
         console.log("get failed")
     }

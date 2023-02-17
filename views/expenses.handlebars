@@ -1,74 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Account</title>
-    <link rel="stylesheet" href="/public/css/style.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    
-  </head>
-  <body>
-    <header>
-        <nav class="navbar navbar-light" id="navbar">
-          <h2 id="budgetly">Budgetly</h2>
-          <form class="form-inline">
-            <button class="btn btn-sm btn-outline-secondary" id="goals-button" type="button">Dashboard</button>
-            <button class="btn btn-sm btn-outline-secondary button" id="logout-button" type="button"><a href="http://localhost:3001">Logout</a></button>
-          </form>
-        </nav>
-     </header>
-    <main>
+{{!-- <!DOCTYPE html>
+<html lang="en"> --}}
+
+{{!-- <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account</title> --}}
+  {{!-- <link rel="stylesheet" href="/public/css/style.css" /> --}}
+  {{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+</head> --}}
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-light" id="navbar">
+      <h2 id="budgetly">Budgetly</h2>
+      <form class="form-inline">
+        <button class="btn btn-sm btn-outline-secondary" id="goals-button" type="button">Dashboard</button>
+        <button class="btn btn-sm btn-outline-secondary button" id="logout-button" type="button"><a
+            href="http://localhost:3001">Logout</a></button>
+      </form>
+    </nav>
+  </header>
+  <main>
+    <div class="daily-expenses">
+
       <div class="welcome-div" id="title">
-        <h1>Daily Expenses</h1>
-        <h5>Today's date:<a id="currentDay"></a></h5>
-          <h1>{{expense}}</h1>
+      <h1>Daily Expenses</h1>
+      <h5>Today's date:<a id="currentDay"></a></h5>
+      {{!-- <h1>{{expense}}</h1> --}}
       </div>
       <div>
-        
-        
-       
-        <form class='new-goal-form'>
+      <form class='new-goal-form'>
 
-          <select id="category" class="form-select" aria-label="Default select example">
-            <option> Select a Category</option>
-            <option value="1">Food</option>
-            <option value="2">House Loan</option>
-            <option value="3">Personal</option>
-            <option value="4">Savings</option>
-            <option value="5">Transportation</option>
-          </select>
+        <div>
+          <b>Expense Category</b>
+        </div>
+        <select id="category" class="form-select" aria-label="Default select example">
+          <option> Category</option>
+          <option value="1">Food</option>
+          <option value="2">House Loan</option>
+          <option value="3">Personal</option>
+          <option value="4">Savings</option>
+          <option value="5">Transportation</option>
+        </select>
 
+        <div>
           <div>
-            <div>
-              Add a Note
-            </div>
-            <div class="input-group mb-3">        
-              <input id="note" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-            </div>
-          </div>  
+            <b>Add a Note</b>
+          </div>
+          <div class="input-group mb-3">
+            <input id="note" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+          </div>
 
+
+        <div>
           <div>
-            <div>
-              Expense Amount
-            </div>
-            <div class="input-group mb-3">        
-              <span class="input-group-text">$</span>
-              <input id="amount" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-            </div>
+            <b>Expense Amount</b>
           </div>
-          
-          <div class="goal-button">
-            <button type="button" value="submit" class="btn btn-outline-info" id="saveButton">Add Expense</button>
-            {{!-- <button type="button" value="submit" class="btn btn-outline-info" id="deleteButton">Delete Expense</button> --}}
+          <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input id="amount" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
           </div>
+        </div>
+
+        <div class="goal-button">
+          <button type="button" value="submit" class="btn btn-outline-info" id="saveButton">Add Expense</button>
+          {{!-- <button type="button" value="submit" class="btn btn-outline-info" id="deleteButton">Delete
+            Expense</button> --}}
+        </div>
+
         </form>
+        
          <div>
           {{user.name}}'s Current Expenses:
           <div class="row justify-content-center">
@@ -97,41 +102,74 @@
                 </tbody>
               </table>
 
-            </div>
+
+      </form>
+      {{!-- Show the user's expenses --}}
+      <div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 ">
+            <b> {{user.name}}'s Current Expenses: </b>
           </div>
-
         </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 ">
+            <table class="table table-bordered table-responsive">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col">Amount Spent</th>
+                  <th scope="col">Note</th>
+                  <th scope="col">Date Created</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each expenses as |Expense|}}
+                <tr id="{{Expense.category_id}}">
+                  <td>{{Expense.category_name}}</td>
+                  <td>${{Expense.amount_spent}}</td>
+                  <td>{{Expense.note}}</td>
+                  <td>{{format_time Expense.date_created}}</td>
+                  <td><button class="del-btn btn btn-info">Delete</button></td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
 
-        <nav class="bottom-nav">
-  <div>Budgetly</div>
-</nav>
-    </main>
-    <script>
-          var today = new Date();
-          var dd = String(today.getDate()).padStart(2, '0');
-          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
-          var yyyy = today.getFullYear();
-          today = mm + '/' + dd + '/' + yyyy;
-          const currentDay = document.getElementById('currentDay')
-          currentDay.textContent += today;
-    </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-      crossorigin="anonymous"
-    ></script>
-    {{!-- <!-- Day.js link -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-      crossorigin="anonymous">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+
+    <nav class="bottom-nav">
+      <div>Budgetly</div>
+    </nav>
+  
+  </main>
+  <script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+    const currentDay = document.getElementById('currentDay')
+    currentDay.textContent += today;
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  {{!-- <!-- Day.js link -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous">
     </script> --}}
-    <script src="/js/expenses.js"></script>
-    <script src='/js/logout.js'></script> 
-  </body>
-</html>
+  <script src="/js/expenses.js"></script>
+  <script src='/js/logout.js'></script>
+</body>
+
+{{!-- </html> --}}
