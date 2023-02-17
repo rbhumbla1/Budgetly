@@ -1,3 +1,5 @@
+const Budget = require("../models/Budget")
+
 module.exports = {
   get_emoji: () => {
     const randomNum = Math.random();
@@ -14,5 +16,7 @@ module.exports = {
 
   format_time:(string) => {
     return string.toLocaleDateString()
-  }
+  },
+
+
 };

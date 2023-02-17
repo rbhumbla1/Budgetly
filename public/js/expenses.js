@@ -59,6 +59,8 @@ const newFormHandler = async (e) => {
      const amount = document.getElementById('amount').value.trim();
      const date = today;
 
+  
+
      const response = await fetch('/api/expenses', {
       method: 'POST',
       body: JSON.stringify({

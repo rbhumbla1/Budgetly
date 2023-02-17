@@ -14,8 +14,6 @@ router.get('/', withAuth, async (req, res) => {
         id:req.session.user_id
       }})
       
-
-      
       res.render('expenses', expenseData)
     } catch (err) {
       res.status(500).json(err);

@@ -11,7 +11,7 @@ const signupForm = async (e) => {
 
   const email = document.getElementById('email-input').value.trim();
   const password = document.getElementById('password-input').value.trim();
-
+  
   console.log('test');
 
   const inputs = {
