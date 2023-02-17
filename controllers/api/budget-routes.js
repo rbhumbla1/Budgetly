@@ -71,6 +71,29 @@ router.get('/goals', withAuth, async (req, res) => {
       budgets.fund_remaining = budgets[0].amount - expenses[0].amount_spent;
     });
 
+// //
+    // const budget = budgetData.map((items)=>items.get({plain:true}))
+
+
+    // // console.log('@@@@@@@@@@@@@@@@@@@',parseInt(budget))\
+    
+    // const budgetAmount = budgets[0].amount
+    // console.log("------------------------",expenses)
+
+    // const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+
+    // console.log('@@@@@@@@@@',expenses[0].amount_spent)
+
+
+    // budgets.fund_remaining = Number(expenses[0].amount_spent);
+    // budgets[0].amount - expenses[0].amount_spent
+    // console.log("00000000000000000",expenses[0].amount_spent)
+    // console.log("----------------",budgets[0].amount)
+
+    // console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgets.fund_remaining)
+
+//
+
     //call the goals.handlebar to display
     res.render('goals', {
       budgets, user,

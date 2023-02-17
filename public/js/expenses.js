@@ -9,6 +9,7 @@ var noteEl = '';
 var priceEl = '';
 
 
+
 // For adding a new expense given an expense category and amount for the expense
 const addNewExpense = async (category, note, amount_spent) => {
 
@@ -31,6 +32,7 @@ const addNewExpense = async (category, note, amount_spent) => {
   //   alert('Failed to add expense. Make sure you select a category.');
   // }
 };
+
 
 //Event handler
 const newFormHandler = async (e) => {

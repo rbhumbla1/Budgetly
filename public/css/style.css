@@ -1,7 +1,7 @@
 /* route http://localhost:3001/api/budgets/goals */
 
 * {
-    margin: 2px;
+   margin: .5; 
 }
 
 
@@ -14,7 +14,12 @@ h1 {
     font-family: rockwell;
 }
 
+h2 {
+    margin: 5px;
+}
+
 .navbar {
+    z-index: 1;
     display: flex;
     top: 0;
     width: 100%;
@@ -25,6 +30,13 @@ h1 {
     position: fixed;
     top: 0;
     width: 100%;
+    margin-top: 75px;
+    margin-bottom: 50px;
+    =
+}
+
+.form-inline {
+    margin: 5px;
 }
 
 .parent {
@@ -35,12 +47,18 @@ h1 {
 
 }
 
+.container {
+    margin-top: 75px;
+    margin-bottom: 50px;
+}
+
 .chart {
     color: var(--fontcolor);
     font-weight: 250;
     border: solid rgb(210, 210, 210);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
+    padding: 10px;
 
 }
 
@@ -53,9 +71,13 @@ h1 {
     font-weight: 250;
     border: solid rgb(210, 210, 210);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
     text-align: center;
 }
 
+table {
+    justify-content: center;
+}
 .goal-button {
     text-align: start;
 }
@@ -161,13 +183,14 @@ p {
 #currentDay {
     color: rgb(55, 224, 247) !important;
 }
-
+/* 
 @media (max-width: 1050px) {
     .parent {
         margin-top: 75px;
         margin-bottom: 50px;
         display: grid;
         grid-template-columns: auto;
-    }
 
-}
+    } */
+/*     
+} */
