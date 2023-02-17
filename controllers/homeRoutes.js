@@ -3,15 +3,7 @@ const { Budget, User, Expense, BudgetCategory } = require('../models');
 const withAuth = require('../utils/auth');
 const { QueryTypes } = require('sequelize');
 
-class Budgetspent {
-  constructor(budget) {
-    budget = this.budget;
-  }
 
-  amountSpent(spent) {
-    return this.budget - spent;
-  }
-}
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -55,7 +47,7 @@ router.get('/signup', (req, res) => {
 });
 
 
-// Added a route to get data to display expenses for a user
+// // Added a route to get data to display expenses for a user
 router.get('/expenses', withAuth, async (req, res) => {
   try {
     //Get current expenses for the user);
@@ -78,7 +70,10 @@ router.get('/expenses', withAuth, async (req, res) => {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: ['name'],
     });
-    const user = userData.get({ plain: true });
+    const user = userData.get({ plain: true })
+
+
+
 
     // Get Budget cateories
     const nameData = await BudgetCategory.findAll({
@@ -88,11 +83,6 @@ router.get('/expenses', withAuth, async (req, res) => {
 
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
 
-    //NEW STUFF HERE
-    // const fundLeft = expenses.map((expense)=> expense.amount_spent - expense.budget.amount)
-
-    // console.log(fundLeft,"`````````````````````")
-    
 
     //add category_name to the data send to goals.handlebar for displaying
   
