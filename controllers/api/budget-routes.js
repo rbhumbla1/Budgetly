@@ -70,7 +70,7 @@ router.get('/goals', withAuth, async (req, res) => {
       budget.category_name = names[budget.category_id - 1].category;
       budgets.fund_remaining = budgets[0].amount - expenses[0].amount_spent;
     });
-// //
+//
     // const budget = budgetData.map((items)=>items.get({plain:true}))
 
 

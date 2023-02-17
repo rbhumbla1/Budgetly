@@ -79,7 +79,9 @@
                     <th scope="col">Category</th>
                     <th scope="col">Amount Spent</th>
                     <th scope="col">Note</th>
+                    <th scope="col">Fund Remaining</th>
                     <th scope="col">Date Created</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -88,6 +90,7 @@
                     <td>{{Expense.category_name}}</td>
                     <td>${{Expense.amount_spent}}</td>
                     <td>{{Expense.note}}</td>
+                    <td>${{Expense.fundleft}}</td>
                     <td>{{format_time Expense.date_created}}</td>
                     </tr>
                   {{/each}}
