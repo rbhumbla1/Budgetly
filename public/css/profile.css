@@ -1,6 +1,10 @@
 
 /* http://localhost:3001/expenses */
 
+body {
+    margin-top: 100px;
+}
+
 .profile-page {
    display:flex;
    flex-direction: column;
@@ -20,4 +24,8 @@
 
 .profile-card a {
     color: gray;
+}
+
+.daily-expenses {
+    margin: 5px;
 }

@@ -1,19 +1,34 @@
 /* route http://localhost:3001/login */
 body {
+    margin: 0;
+}
+
+main {
+
     color: rgb(55, 224, 247);
     font-family: rockwell;
     display:flex;
     flex-direction:column;
     justify-content:center;
-    align-items:center;
     flex-wrap: wrap;
     gap: 20px;
     height: 70vh;
 }
-main {
+
+.login-box {
+    background-color: white;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     height: auto;
     width: 30vw;
     padding: 1.5rem;
-    
+    z-index: 2;
+}
+ 
+img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 170%;
+    z-index: 1;
 }

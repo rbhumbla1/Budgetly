@@ -8,76 +8,87 @@
   </nav>
 </div>
 </header>
-<main >
-  <div class="parent">
+
+<main class="container">
+<div class="row">
+{{!-- <div class="parent"> --}}
+
     {{!-- PIe chart to show budget goals --}}
-    <div class="chart">
-      <div class="welcome-div" id="title">
-        <h1>Monthly Spending</h1>
-        <div id="no-goals-yet"></div>
-        </div>
-        
-      <svg id="pie-chart" width="500" height="400"></svg>
-    </div>
 
+          <div class="col">
 
-    <div class="goals">
-      <div class="welcome-div" id="title">
-        <h1>My Goals</h1>
-
-        {{!-- Display Budget Goals of the user --}}
-
-        <div>
-          <b>{{user.name}}'s Current Budget Goals:</b>
-          <div class="row justify-content-center">
-            <div class="col-md-6 ">
-              <table class="table table-bordered table-responsive">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Budget Category</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Fund Remaining</th>
-                    <th scope="col">Date Created</th>
-                    <th scope="col">Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each budgets as |Budget|}}
-                  <tr id="{{Budget.category_id}}">
-                    <td>{{Budget.category_name}}</td>
-                    <td>${{Budget.amount}}</td>
-                    <td>${{Budget.fund_remaining}}</td>
-                    {{!-- <td>${{fund_left}}</td> --}}
-                    <td>{{format_time Budget.date_created}}</td>
-                    <td><button data-id="{{Budget.category_id}}" class="del-btn btn btn-info">Delete</button></td>
-                  </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-
+                      <div class="chart">
+            <div class="welcome-div" id="title">
+             <h1>Monthly Spending</h1>
+                <div id="no-goals-yet">
+                </div>
             </div>
+           <svg id="pie-chart" width="500" height="400"></svg>
           </div>
 
-        </div>
+          </div>
 
+          <div class="col">
+            <div class="goals">
+            <div class="welcome-div" id="title">
+              <h1>My Goals</h1>
+                {{!-- Display Budget Goals of the user --}}
+                <div>
+                  <b>{{user.name}}'s Current Budget Goals:
+                  </b>
+                  <table class="table table-bordered table-responsive">
+                  <div class="row justify-content-center">
+                    <div class="col-md-6">
+                      
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Budget Category</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Fund Remaining</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {{#each budgets as |Budget|}}
+                            <tr id="{{Budget.category_id}}">
+                              <td>{{Budget.category_name}}</td>
+                              <td>${{Budget.amount}}</td>
+                              <td>${{Budget.fund_remaining}}</td>
+                              {{!-- <td>${{fund_left}}</td> --}}
+                              <td>{{format_time Budget.date_created}}</td>
+                              <td><button data-id="{{Budget.category_id}}" class="del-btn btn btn-info">Delete</button></td>
+                            </tr>
+                          {{/each}}
+                        </tbody>
+                      
+                    </div>
+                  </div>
+                  </table>
+                </div>
         {{!-- Add new goals --}}
-        <div>
-          <b>Budget Goals Actions</b>
-        </div>
+          <div>
+            <b>Budget Goals Actions</b>
+          </div>
+
         {{!-- Radio button for various actions --}}
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" id="inlineCheckbox1" value="addGoal" name="box">
           <label class="form-check-label" for="inlineCheckbox1">Add a New Goal</label>
         </div>
+
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" id="inlineCheckbox2" value="updateGoal" name="box">
           <label class="form-check-label" for="inlineCheckbox2">Update a Goal</label>
         </div>
+
         {{!-- Form to get goal information --}}
-        <form id='form-new-goal' class='new-goal-form'>
+          <form id='form-new-goal' class='new-goal-form'>
           <div id="amt-label">
             <b>Budget Category</b>
           </div>
+
           <div>
             <select id="category" class="form-select" aria-label="Default select example">
               <option selected>Category</option>
@@ -88,6 +99,7 @@
               <option value="5">Transportation</option>
             </select>
           </div>
+
           <div>
             <div id="amt-label">
               <b>Budget Amount</b>
@@ -97,14 +109,23 @@
               <input id="amount" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
             </div>
           </div>
+
           <div class="goal-button">
             <button type="button" class="btn btn-outline-info" id="clickButton">+</button>
           </div>
-      </div>
-      </form>
+      
+          </form>
+        </div>
+          </div>
+        
 
-    </div>
+
+     
+          
+{{!-- </div> --}}
+</div>    
 </main>
+
 <nav class="bottom-nav">
   <div>Budgetly</div>
 </nav>
