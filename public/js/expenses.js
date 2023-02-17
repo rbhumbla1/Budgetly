@@ -1,4 +1,4 @@
-const addNewExp = document.getElementById('new-goal');
+const addNewExp = document.getElementById('saveButton');
 const savedExpenses = document.getElementById('savedExpenses');
 
 var cardBlockDiv = '';
@@ -13,24 +13,24 @@ var priceEl = '';
 // For adding a new expense given an expense category and amount for the expense
 const addNewExpense = async (category, note, amount_spent) => {
 
-  // const response = await fetch(`/api/expenses`, {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     category,
-  //     note,
-  //     amount_spent,
-  //     // date,
-  //   }),
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
+  const response = await fetch(`/api/expenses`, {
+    method: 'POST',
+    body: JSON.stringify({
+      category,
+      note,
+      amount_spent,
+      // date,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-  // if (response.ok) {
-  //   document.location.replace('/expenses');
-  // } else {
-  //   alert('Failed to add expense. Make sure you select a category.');
-  // }
+  if (response.ok) {
+    document.location.replace('/expenses');
+  } else {
+    alert('Failed to add expense. Make sure you select a category.');
+  }
 };
 
 
@@ -59,32 +59,29 @@ const newFormHandler = async (e) => {
      const amount = document.getElementById('amount').value.trim();
      const date = today;
 
-     if(category,note,amount) {
+  
 
-      const response = await fetch(`/api/expenses`, {
-        method: 'POST',
-        body: JSON.stringify({
-          category,
-          note,
-          amount,
-          // date,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    
-      if (response.ok) {
-        document.location.replace('/expenses');
-      } else {
-        alert('Failed to add expense. Make sure you select a category.');
-      }
-     }
-
-     
+     const response = await fetch('/api/expenses', {
+      method: 'POST',
+      body: JSON.stringify({
+        category,
+        note,
+        amount,
+        // date,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (response.ok) {
+      document.location.replace('/expenses');
+    } else {
+      alert('Failed to add expense. Make sure you select a category.');
+    }
 };
 
-addNewExp.addEventListener('submit', newFormHandler);
+addNewExp.addEventListener('click', newFormHandler);
 
 //Clicking on Goals button will take the user to expense page
 const goals = document.getElementById("goals-button")
