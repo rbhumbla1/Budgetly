@@ -57,14 +57,12 @@ router.get('/expenses', withAuth, async (req, res) => {
       include: [
         {
           model: Budget,
-          
-          attributes: ['amount','fund_remaining'],
+
+          attributes: ['amount', 'fund_remaining'],
         },
       ],
       attributes: ['category_id', 'amount_spent', 'note', 'date_created'],
     });
-
-
 
     //Get the User Data
     const userData = await User.findByPk(req.session.user_id, {
@@ -73,6 +71,11 @@ router.get('/expenses', withAuth, async (req, res) => {
     const user = userData.get({ plain: true })
 
 
+    //Get budget Data to figure out fund remaining
+    const budgetData = await Budget.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id', 'amount', 'fund_remaining', 'date_created']
+    });
 
 
     // Get Budget cateories
@@ -83,17 +86,22 @@ router.get('/expenses', withAuth, async (req, res) => {
 
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
 
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
 
-    //add category_name to the data send to goals.handlebar for displaying
-  
+
+    //add category_name and fund_remining to the data send to goals.handlebar for displaying
+
     expenses.forEach((expense) => {
       expense.category_name = names[expense.category_id - 1].category;
-   
-      // expense.fundleft = expense.budget.amount -= expense.amount_spent
-      expense.fundleft = Number(expense.budget.fund_remaining) - expense.amount_spent
+
+      for (let i = 0; i < budgets.length; i++) {
+        if (expense.category_id === budgets[i].category_id) {
+          expense.fund_left = budgets[i].fund_remaining;
+        }
+      }
     });
 
-    console.log(expenses,'@@@@@@@@@@@@@@@@@@@@@');
+    
     //call the goals.handlebar to display
     res.render('expenses', {
       expenses,

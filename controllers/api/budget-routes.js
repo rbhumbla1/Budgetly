@@ -55,44 +55,18 @@ router.get('/goals', withAuth, async (req, res) => {
     });
 
     const expenseData = await Expense.findAll({
-      attributes: ['amount_spent'],
+      where: { user_id: req.session.user_id},
+      attributes: ['category_id', 'amount_spent'],
     });
 
     const names = nameData.map((name) => name.get({ plain: true }));
 
     const budgets = budgetData.map((budget) => budget.get({ plain: true }));
 
-    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-
-
-    //add category_name to the data send to goals.handlebar for displaying
-    budgets.forEach((budget) => {
+     //add category_name to the data send to goals.handlebar for displaying
+     budgets.forEach((budget) => {
       budget.category_name = names[budget.category_id - 1].category;
-      budgets.fund_remaining = budgets[0].amount - expenses[0].amount_spent;
     });
-
-// //
-    // const budget = budgetData.map((items)=>items.get({plain:true}))
-
-
-    // // console.log('@@@@@@@@@@@@@@@@@@@',parseInt(budget))\
-    
-    // const budgetAmount = budgets[0].amount
-    // console.log("------------------------",expenses)
-
-    // const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-
-    // console.log('@@@@@@@@@@',expenses[0].amount_spent)
-
-
-    // budgets.fund_remaining = Number(expenses[0].amount_spent);
-    // budgets[0].amount - expenses[0].amount_spent
-    // console.log("00000000000000000",expenses[0].amount_spent)
-    // console.log("----------------",budgets[0].amount)
-
-    // console.log("BUDGET DATAAAAAAAAAAAAAAAAAA",budgets.fund_remaining)
-
-//
 
     //call the goals.handlebar to display
     res.render('goals', {
@@ -116,7 +90,6 @@ router.get('/:id', withAuth, async (req, res) => {
     });
 
     const budgets = budgetData.map((budget) => budget.get({ plain: true }));
-    console.log("**********Get CAT", budgets)
 
     res.status(200).json(budgets);
 
@@ -174,14 +147,16 @@ router.post('/', withAuth, async (req, res) => {
 
 // Update a budget
 router.put('/:id', withAuth, async (req, res) => {
+
   try {
-    const budgetData = await Budget.update({ amount: req.body.amount }, {
-      where: {
-        category_id: req.params.id,
-        user_id: req.session.user_id
-      },
-      individualHooks: true
-    });
+
+  const budgetData = await Budget.update({ amount: req.body.amount }, {
+    where: {
+      category_id: req.params.id,
+      user_id: req.session.user_id
+    },
+    individualHooks: true
+  })
     if (!budgetData[0]) {
       res.status(404).json({ message: 'No budget with this category and user!' });
       return;

@@ -1,17 +1,22 @@
  [
   {
+    "id": 1,
     "category": "Food"
   },
   {
+    "id": 2,
     "category": "House Loan"
   },
   {
+    "id": 3,
     "category": "Personal"
   },
   {
+    "id": 4,
     "category": "Savings"
   },
   {
+    "id": 5,
     "category": "Transportation"
   }
 ]

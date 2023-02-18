@@ -13,12 +13,14 @@ var priceEl = '';
 // For adding a new expense given an expense category and amount for the expense
 const addNewExpense = async (category, note, amount_spent) => {
 
+  console.log("add", category, note, amount_spent);
+
   const response = await fetch(`/api/expenses`, {
     method: 'POST',
     body: JSON.stringify({
       category,
       note,
-      amount_spent,
+      amount_spent
       // date,
     }),
     headers: {
@@ -45,8 +47,7 @@ const newFormHandler = async (e) => {
      var yyyy = today.getFullYear();
      today = mm + '/' + dd + '/' + yyyy;
 
-     console.log("IN newForm");
- 
+   
      const savedExpenses = JSON.parse(localStorage.getItem("savedExpenses")) || [];
      const expenseSums = JSON.parse(localStorage.getItem("expenseSums")) || [];
  
@@ -59,15 +60,13 @@ const newFormHandler = async (e) => {
      const amount = document.getElementById('amount').value.trim();
      const date = today;
 
-  
-
+    console.log("%%%%%%%%%%%%%%", category)
      const response = await fetch('/api/expenses', {
       method: 'POST',
       body: JSON.stringify({
         category,
         note,
         amount,
-        // date,
       }),
       headers: {
         'Content-Type': 'application/json',

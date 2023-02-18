@@ -1,29 +1,34 @@
 const router = require('express').Router();
-const { Expense, User, BudgetCategory,Budget } = require('../../models');
+const { Expense, User, BudgetCategory, Budget } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
 // Get all expenses
 router.get('/', withAuth, async (req, res) => {
-    try {
-      const expenseData = await Expense.findAll({where: {
-        id:req.session.user_id
-      }});
+  try {
+    const expenseData = await Expense.findAll({
+      where: {
+        id: req.session.user_id
+      }
+    });
 
-      const budgets = await Budget.findAll({where: {
-        id:req.session.user_id
-      }})
-      
-      res.render('expenses', expenseData)
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+    const budgets = await Budget.findAll({
+      where: {
+        id: req.session.user_id
+      }
+    })
+
+    res.render('expenses', expenseData)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // Get a single expense
 router.get('/:id', async (req, res) => {
   try {
-    const expenseData = await Expense.findByPk({where: { id: req.session.user_id},
+    const expenseData = await Expense.findByPk({
+      where: { id: req.session.user_id },
       include: [{ model: User }],
     });
 
@@ -40,7 +45,7 @@ router.get('/:id', async (req, res) => {
 
 // Added a route to get data to display expenses for a user
 router.get('/spending', withAuth, async (req, res) => {
- 
+
   try {
 
     //Get current expenses for the user);
@@ -55,9 +60,11 @@ router.get('/spending', withAuth, async (req, res) => {
       attributes: ['name']
     });
     const user = userData.get({ plain: true })
-    const budgetData = Budget.findAll({where: {
-      id: req.session.user_id
-    }})
+    const budgetData = Budget.findAll({
+      where: {
+        id: req.session.user_id
+      }
+    })
 
     // Get Budget cateories
     const nameData = await BudgetCategory.findAll({
@@ -73,7 +80,7 @@ router.get('/spending', withAuth, async (req, res) => {
       expense.category_name = names[expense.category_id - 1].category;
     });
 
-  
+
     //call the goals.handlebar to display
     res.render('expenses', {
       expenses, user,
@@ -88,8 +95,8 @@ router.get('/spending', withAuth, async (req, res) => {
 
 // Create an expense
 router.post('/', withAuth, async (req, res) => {
-  console.log('@@@@@@@@@@@@@@@@@@@',req.body)
   try {
+    console.log("************", req.body);
     const newExpense = await Expense.create({
       amount_spent: req.body.amount,
       note: req.body.note,
@@ -102,29 +109,60 @@ router.post('/', withAuth, async (req, res) => {
       return;
     }
 
+    //Calculate the remaining budget goal amount left after each expense
+    const budgetData = await Budget.findAll({
+      where: { user_id: req.session.user_id },
+      attributes: ['category_id', 'amount', 'fund_remaining', 'date_created']
+    });
+
+    const budgets = budgetData.map((budget) => budget.get({ plain: true }));
+
+
+    let fundLeft = 0;
+
+    //Loop through budgets to find the item with same category as expense and subtract amount_spend from fund_remaining
+    for(let i = 0; i < budgets.length; i++){
+        if(budgets[i].category_id === parseInt(newExpense.dataValues.category_id)){
+          budgets[i].fund_remaining -= newExpense.dataValues.amount_spent;
+          fundLeft = budgets[i].fund_remaining
+     
+        }
+    }
+
+    //update the Budget table
+    await Budget.update({ fund_remaining: fundLeft}, {
+      where: { user_id: req.session.user_id, category_id: parseInt(newExpense.dataValues.category_id)},
+    });
+
+  
     res.status(200).json(newExpense);
   } catch (err) {
     res.status(400).json(err);
   }
+
+
+
+
+  //save it in Budgets table fund_remaining to be used to diaply in dashboard
 });
 
 // Update an expense
 router.put('/:id', async (req, res) => {
-    try {
-      const expenseData = await Expense.update(req.body, {
-        where: {
-          id: req.params.id,
-        },
-        individualHooks: true
-      });
-      if (!expenseData[0]) {
-        res.status(404).json({ message: 'No user with this id!' });
-        return;
-      }
-      res.status(200).json(expenseData);
-    } catch (err) {
-      res.status(500).json(err);
+  try {
+    const expenseData = await Expense.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+      individualHooks: true
+    });
+    if (!expenseData[0]) {
+      res.status(404).json({ message: 'No user with this id!' });
+      return;
     }
+    res.status(200).json(expenseData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // Delete an expense
