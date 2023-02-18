@@ -19,7 +19,9 @@ Expense.init(
         note: {
             type: DataTypes.STRING(100),
         },
-     
+        fundLeft: {
+            type: DataTypes.FLOAT,
+        },
         date_created: {
             type: DataTypes.DATE,
             allowNull: false,
