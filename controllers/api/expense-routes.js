@@ -134,6 +134,8 @@ router.post('/', withAuth, async (req, res) => {
       where: { user_id: req.session.user_id, category_id: parseInt(newExpense.dataValues.category_id)},
     });
 
+    console.log(newExpense,'@@@@@@@')
+
   
     res.status(200).json(newExpense);
   } catch (err) {
