@@ -162,18 +162,21 @@ router.put('/:id', withAuth, async (req, res) => {
       category_id: req.params.id
     },})
 
-
     const budget = budgets.map((items)=>items.get({plain:true}))
-
+    let oldAmt = parseInt(budget[0].amount);
+    console.log(req.body.amount - oldAmt,'##########OLD')
+    let newFundLeft = parseInt(budget[0].fund_remaining) + (req.body.amount - oldAmt);
 
     //the existing fund_Remaining will add up to the new update with req.body.amount.
-  const budgetData = await Budget.update({ amount: req.body.amount, fund_remaining: parseInt(req.body.amount) + parseInt(budget[0].fund_remaining)}, {
+  const budgetData = await Budget.update({ amount: req.body.amount, fund_remaining: newFundLeft}, {
     where: {
       category_id: req.params.id,
       user_id: req.session.user_id
     },
     individualHooks: true
-  })
+  }) 
+
+
 
   
 
