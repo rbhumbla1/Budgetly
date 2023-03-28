@@ -154,14 +154,14 @@ The databse contains the following four models:
 
 ## Usage
 
-1. 1. You can access the file in the GitHub repository: https://github.com/rbhumbla1/E-Commerce-Back-End
+1. 1. You can access the file in the GitHub repository: https://github.com/rbhumbla1/Budgetly
 2. Run the application in the terminal using this command: 
 ```
 node server
 ```
 3. Open the website using the following link:
 
-  [Live website](https://budget-app-nodejs.herokuapp.com/)
+  [Live website](https://budgetly.herokuapp.com/)
 
 4. Click the 'Create an account' button if you do not already have an account.
 
